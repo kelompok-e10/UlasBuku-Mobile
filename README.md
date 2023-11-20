@@ -19,7 +19,7 @@ Aplikasi **UlasBuku** akan memiliki beberapa modul utama, termasuk:
 4. **Pesan Sesama Pengguna**: Pengguna dapat berkomunikasi satu sama lain melalui pesan.
    
 ## Sumber Data
-Data mengenai katalog buku akan diperoleh melalui [**Kaggle**](https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset/). API ini akan memberikan informasi tentang buku-buku yang tersedia, termasuk judul, penulis, tahun publikasi, penerbit, dan sampul buku.
+Data buku akan diambil dari API yang telah dibuat pada tugas kelompok yang dikerjakan sebagai proyek tengah semester. Data yang diambil tersebut diperoleh melalui [**Kaggle**](https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset/). API ini akan memberikan informasi tentang buku-buku yang tersedia, termasuk judul, penulis, tahun publikasi, penerbit, dan sampul buku.
 
 ## Peran Pengguna
 Aplikasi **UlasBuku** akan memiliki beberapa peran pengguna beserta deskripsinya:
@@ -36,10 +36,6 @@ Aplikasi **UlasBuku** akan memiliki beberapa peran pengguna beserta deskripsinya
    - Menambahkan informasi tentang buku yang telah mereka baca.
    - Mengirim dan menerima pesan dari pengguna lain.
    - Melihat profil diri sendiri.
-
-3. **Admin**: Pengguna dengan hak akses administratif.
-   - Menghapus buku dari database.
-   - Menambahkan buku baru ke database.
 
 ## Lisensi
 Aplikasi ini akan dilisensikan di bawah [lisensi MIT](LICENSE).
