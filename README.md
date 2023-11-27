@@ -41,6 +41,10 @@ Aplikasi **UlasBuku** akan memiliki beberapa peran pengguna beserta deskripsinya
 
 Login dengan menggunakan fetch dari website django yang telah dibuat. Kemudian bisa melihat buku-buku yang sudah ada. Lalu bisa membuat review baru terhadap sebuah buku. 
 
+Selain itu, berikut adalah _flowchart_ penggunaan aplikasi kami:
+
+![Alt text](ReadmePic/Flowchart.png)
+
 # Tautan Berita Acara
 
 Tautan berita acara dapat dilihat pada [tautan berikut](https://docs.google.com/spreadsheets/d/17apHL7ozM74HWTzj6h73pk9-J-Uv__YU/edit#gid=2005070693)
