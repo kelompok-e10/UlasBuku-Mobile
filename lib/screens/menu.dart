@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
+import 'package:ulasbuku_mobile/widgets/shop_card.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
-  final List<ShopItem> items = [
-    ShopItem("Lihat Produk", Icons.checklist),
-    ShopItem("Tambah Produk", Icons.add_shopping_cart),
-    ShopItem("Logout", Icons.logout),
+  final List<ShoplistItem> items = [
+    ShoplistItem("Lihat Item", Icons.checklist),
+    ShoplistItem("Tambah Item", Icons.add_shopping_cart),
+    ShoplistItem("Logout", Icons.logout),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    // Overall app
-    backgroundColor:Color.fromRGBO(135, 148, 192, 1.0), // Mengubah background color dari overall app
+    backgroundColor:Color.fromRGBO(135, 148, 192, 1.0),
       appBar: AppBar(
+        backgroundColor:Color.fromRGBO(1, 1, 1, 0.8),
         title: const Text(
           'UlasBuku',
           style: TextStyle(
@@ -23,8 +25,8 @@ class MyHomePage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor:Color.fromRGBO(1, 1, 1, 0.8),
       ),
+      drawer: const LeftDrawer(),
       body: SingleChildScrollView(
         // Widget wrapper yang dapat discroll
         child: Padding(
@@ -61,9 +63,9 @@ class MyHomePage extends StatelessWidget {
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
                 shrinkWrap: true,
-                children: items.map((ShopItem item) {
+                children: items.map((ShoplistItem item) {
                   // Iterasi untuk setiap item
-                  return ShopCard(item);
+                  return ShoplistCard(item);
                 }).toList(),
               ),
             ],
@@ -74,54 +76,9 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class ShopItem {
+class ShoplistItem {
   final String name;
   final IconData icon;
 
-  ShopItem(this.name, this.icon);
-}
-
-class ShopCard extends StatelessWidget {
-  final ShopItem item;
-
-  const ShopCard(this.item, {super.key}); // Constructor
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.grey[100],
-      child: InkWell(
-        // Area responsive terhadap sentuhan
-        onTap: () {
-          // Memunculkan SnackBar ketika diklik
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(
-                content: Text("Kamu telah menekan tombol ${item.name}!")));
-        },
-        child: Container(
-          // Container untuk menyimpan Icon dan Text
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.icon,
-                  color: Colors.black,
-                  size: 30.0,
-                ),
-                const Padding(padding: EdgeInsets.all(3)),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.black),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  ShoplistItem(this.name, this.icon);
 }
