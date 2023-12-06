@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:ulasbuku_mobile/menu.dart';
+import 'package:ulasbuku_mobile/screens/login.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'UlasBuku Mobile',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(135, 148, 192, 1.0)),
-        useMaterial3: true,
-      ),
-      home: MyHomePage(),
+    return Provider(
+      create: (_) {
+        CookieRequest request = CookieRequest();
+        return request;
+      },
+      child: MaterialApp(
+          title: 'Ulas Buku Mobile',
+          theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(135, 148, 192, 1.0)),            useMaterial3: true,
+          ),
+          home: const LoginPage()),
     );
   }
 }
