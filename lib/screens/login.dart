@@ -6,8 +6,6 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:ulasbuku_mobile/screens/register.dart';
 
-import 'package:ulasbuku_mobile/send_messages/pages/users_page.dart';
-
 void main() {
   runApp(
       const LoginApp()

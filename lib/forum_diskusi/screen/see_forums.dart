@@ -23,6 +23,8 @@ class _ForumPageState extends State<ForumPage> {
       headers: {"Content-Type": "application/json"},
     );
 
+    // print(response.body);
+
     // melakukan decode response menjadi bentuk json
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
@@ -39,9 +41,9 @@ class _ForumPageState extends State<ForumPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Color.fromRGBO(135, 148, 192, 1.0),
+      backgroundColor: Color.fromRGBO(135, 148, 192, 1.0),
       appBar: AppBar(
-        backgroundColor:Color.fromRGBO(1, 1, 1, 0.8),
+        backgroundColor: Color.fromRGBO(1, 1, 1, 0.8),
         title: const Text(
           'Forum Diskusi',
           style: TextStyle(
@@ -52,77 +54,73 @@ class _ForumPageState extends State<ForumPage> {
         ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-        drawer: const LeftDrawer(),
-        body: FutureBuilder(
-            future: fetchForum(),
-            builder: (context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text('Error: ${snapshot.error}'),
-              );
-            } else if (!snapshot.hasData || snapshot.data.isEmpty) {
-              return const Center(
-                child: Text(
-                  'Tidak ada data forum.',
-                  style: TextStyle(color: Color(0xff59A5D8), fontSize: 20),
-                ),
-              );
-            } 
-              
-              if (snapshot.data == null) {
-                return const Center(child: CircularProgressIndicator());
-              } else {
-                if (!snapshot.hasData) {
-                  return const Column(
-                    children: [
-                      Text(
-                        "Tidak ada data produk.",
-                        style:
-                        TextStyle(color: Color(0xff59A5D8), fontSize: 20),
-                      ),
-                      SizedBox(height: 8),
-                    ],
+      drawer: const LeftDrawer(),
+      body: Column(
+        children: [
+          Expanded(
+            child: FutureBuilder(
+              future: fetchForum(),
+              builder: (context, AsyncSnapshot<List<Forum>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Text('Error: ${snapshot.error}'),
                   );
-                } else {
-                  return ListView.builder(
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (_, index) => Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 12),
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "${snapshot.data![index].fields.bookInfo.bookTitle}",
-                              style: const TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Text("${snapshot.data![index].fields.rating}"),
-                            const SizedBox(height: 10),
-                            Text("${snapshot.data![index].fields.review}"),
-                            const SizedBox(height: 10),
-
-                            ElevatedButton(
-                              onPressed: () async {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const ForumFormPage()),
-                                );
-                              },
-                              child: const Text('Tambahkan Diskusi'),
-                            ),
-                          ],
-                        ),
-                      ));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(
+                    child: Text(
+                      'Tidak ada data forum.',
+                      style: TextStyle(color: Color(0xff59A5D8), fontSize: 20),
+                    ),
+                  );
                 }
-              }
-            }));
+
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (_, index) => Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    padding: const EdgeInsets.all(20.0),
+                    color: Color.fromRGBO(234, 242, 215, 1),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${snapshot.data![index].bookInfo.bookTitle}",
+                          style: const TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Image.network("${snapshot.data![index].bookInfo.imageUrlS}"),
+                        const SizedBox(height: 10),
+                        Text("${snapshot.data![index].rating}"),
+                        const SizedBox(height: 10),
+                        Text("${snapshot.data![index].review}"),
+                        const SizedBox(height: 10),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ForumFormPage()),
+                );
+              },
+              child: const Text('Tambahkan Diskusi'),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

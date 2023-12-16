@@ -3,14 +3,13 @@
 //     final forum = forumFromJson(jsonString);
 
 import 'dart:convert';
-import 'package:ulasbuku_mobile/models/book.dart';
 
 List<Forum> forumFromJson(String str) => List<Forum>.from(json.decode(str).map((x) => Forum.fromJson(x)));
 
 String forumToJson(List<Forum> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Forum {
-    Book bookInfo;
+    BookInfo bookInfo;
     String review;
     int rating;
     DateTime dateAdded;
@@ -25,7 +24,7 @@ class Forum {
     });
 
     factory Forum.fromJson(Map<String, dynamic> json) => Forum(
-        bookInfo: Book.fromJson(json["book_info"]),
+        bookInfo: BookInfo.fromJson(json["book_info"]),
         review: json["review"],
         rating: json["rating"],
         dateAdded: DateTime.parse(json["date_added"]),
@@ -38,5 +37,41 @@ class Forum {
         "rating": rating,
         "date_added": "${dateAdded.year.toString().padLeft(4, '0')}-${dateAdded.month.toString().padLeft(2, '0')}-${dateAdded.day.toString().padLeft(2, '0')}",
         "user": user,
+    };
+}
+
+class BookInfo {
+    String isbn;
+    String bookTitle;
+    String author;
+    int publishedYear;
+    String publisher;
+    String imageUrlS;
+
+    BookInfo({
+        required this.isbn,
+        required this.bookTitle,
+        required this.author,
+        required this.publishedYear,
+        required this.publisher,
+        required this.imageUrlS,
+    });
+
+    factory BookInfo.fromJson(Map<String, dynamic> json) => BookInfo(
+        isbn: json["isbn"],
+        bookTitle: json["book_title"],
+        author: json["author"],
+        publishedYear: json["published_year"],
+        publisher: json["publisher"],
+        imageUrlS: json["image_url_s"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "isbn": isbn,
+        "book_title": bookTitle,
+        "author": author,
+        "published_year": publishedYear,
+        "publisher": publisher,
+        "image_url_s": imageUrlS,
     };
 }

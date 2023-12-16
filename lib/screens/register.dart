@@ -113,7 +113,7 @@ Widget build(BuildContext context) {
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 20.0),
-                child: TextField(
+                child: TextFormField(
                   controller: _usernameController,
                   decoration: const InputDecoration(
                     labelText: 'Username',
@@ -133,7 +133,7 @@ Widget build(BuildContext context) {
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 20.0),
-                child: TextField(
+                child: TextFormField(
                   controller: _passwordController,
                   decoration: const InputDecoration(
                     labelText: 'Password',
@@ -154,7 +154,7 @@ Widget build(BuildContext context) {
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 20.0),
-                child: TextField(
+                child: TextFormField(
                   controller: _passwordConfirmationController,
                   decoration: const InputDecoration(
                     labelText: 'Password Confirmation',
@@ -176,7 +176,7 @@ Widget build(BuildContext context) {
                 // Kirim ke Django dan tunggu respons
                 // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                 final response = await request.postJson(
-                    "http://127.0.0.1:8000/register/",
+                    "http://127.0.0.1:8000/auth/register/",
                     jsonEncode(<String, String>{
                       'username': username,
                       'password': password,
@@ -186,7 +186,7 @@ Widget build(BuildContext context) {
                   username = response['username'];
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content:
-                        Text("Akun $username berhasil  didaftarkan!"),
+                        Text("Akun $username berhasil didaftarkan!"),
                   ));
                   Navigator.pushReplacement(
                     context,
