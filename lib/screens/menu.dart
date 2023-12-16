@@ -24,7 +24,7 @@ class MyHomePage extends StatelessWidget {
         ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      drawer: const LeftDrawer(),
+      drawer: const LeftDrawer() ,
       body: SingleChildScrollView(
         // Widget wrapper yang dapat discroll
         child: Padding(
