@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // import 'package:ulasbuku_mobile/screens/login.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:ulasbuku_mobile/screens/menu.dart';
+import 'package:ulasbuku_mobile/screens/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,9 +23,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: 'Ulas Buku Mobile',
           theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(135, 148, 192, 1.0)),            useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(1, 1, 1, 0.8)),            useMaterial3: true,
           ),
-          home: MyHomePage()),
+          home: LoginPage()),
     );
   }
 }

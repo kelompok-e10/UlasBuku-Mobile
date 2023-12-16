@@ -1,4 +1,6 @@
 
+// ignore_for_file: must_be_immutable, override_on_non_overriding_member
+
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';

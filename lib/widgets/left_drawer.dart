@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,7 @@ class LeftDrawer extends StatelessWidget {
     final request = context.watch<CookieRequest>();
     return Drawer(
       child: Container(
-        color: const Color.fromRGBO(135, 148, 192, 1.0), // Background color of the drawer
+        color: Color.fromRGBO(135, 148, 192, 1.0), // Background color of the drawer
         child: ListView(
           children: [
              UserAccountsDrawerHeader(
@@ -32,17 +32,19 @@ class LeftDrawer extends StatelessWidget {
                   )
               ),
             decoration: const BoxDecoration(
-              color: Colors.blueAccent,
-              image: DecorationImage(image: AssetImage('assets/background.png'), fit: BoxFit.cover)
+              color: Color.fromRGBO(1, 1, 1, 0.8),
+              image: DecorationImage(
+                image: AssetImage('assets/background.png'), 
+                fit: BoxFit.cover)
             ),
           ),
             ListTile(
-              leading: const Icon(Icons.home_outlined),
+              leading: const Icon(Icons.home_outlined, color: Colors.black),
               title: const Text(
                 'Tentang',
                 style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black54,
+                      fontSize: 16,
+                      color: Colors.black,
                     ),
                     ),
               onTap: () {
@@ -55,12 +57,12 @@ class LeftDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.forum_rounded),
+              leading: const Icon(Icons.forum_rounded, color: Colors.black),
               title: const Text(
                 'Forum Diskusi',
                 style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black54,
+                      fontSize: 16,
+                      color: Colors.black,
                     ),
                     ),
               onTap: () {
@@ -73,12 +75,12 @@ class LeftDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.book),
+              leading: const Icon(Icons.book, color: Colors.black),
               title: const Text(
                 'Daftar Buku',
                 style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black54,
+                      fontSize: 16,
+                      color: Colors.black,
                     ),
                     ),
               onTap: () {
@@ -89,12 +91,12 @@ class LeftDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.message),
+              leading: const Icon(Icons.message, color: Colors.black),
               title: const Text(
                 'Pesan',
                 style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black54,
+                      fontSize: 16,
+                      color: Colors.black,
                     ),
                     ),
               onTap: () {
@@ -105,7 +107,7 @@ class LeftDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.logout),
+              leading: const Icon(Icons.logout, color: Colors.black),
               title: const Text('Logout'),
               onTap: () async{
               final response = await request.logout(
@@ -122,7 +124,7 @@ class LeftDrawer extends StatelessWidget {
                 );
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("$message"),
+                  content: Text(message),
                 ));
               }
               },

@@ -51,6 +51,7 @@ class _ForumFormPageState extends State<ForumFormPage> {
                       decoration: InputDecoration(
                         hintText: "Judul Buku",
                         labelText: "Judul Buku",
+                        fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
@@ -74,6 +75,7 @@ class _ForumFormPageState extends State<ForumFormPage> {
                       decoration: InputDecoration(
                         hintText: "Rating (dari 1-5)",
                         labelText: "Rating (dari 1-5)",
+                        fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
@@ -103,6 +105,7 @@ class _ForumFormPageState extends State<ForumFormPage> {
                       decoration: InputDecoration(
                         hintText: "Ulasan",
                         labelText: "Ulasan",
+                        fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),

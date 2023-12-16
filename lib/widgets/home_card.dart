@@ -8,6 +8,8 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:ulasbuku_mobile/screens/login.dart';
 
+import '../send_messages/pages/users_page.dart';
+
 class UlasBukuCard extends StatelessWidget {
   final UlasBukuItems item;
 
@@ -39,7 +41,7 @@ class UlasBukuCard extends StatelessWidget {
           }
           else if (item.name == "Pesan") {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ForumPage()));
+                MaterialPageRoute(builder: (context) => const Home()));
           }
           else if (item.name == "Logout") {
             final response = await request.logout(
