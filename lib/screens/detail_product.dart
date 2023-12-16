@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:ulasbuku_mobile/models/book.dart';
-import 'package:ulasbuku_mobile/screens/forum_diskusi/see_forums.dart';
+import 'package:ulasbuku_mobile/forum_diskusi/screen/see_forums.dart';
 import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
 
 

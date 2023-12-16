@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:ulasbuku_mobile/models/forum.dart';
-import 'package:ulasbuku_mobile/screens/forum_diskusi/forum_form.dart';
+import 'package:ulasbuku_mobile/forum_diskusi/model/forum.dart';
+import 'package:ulasbuku_mobile/forum_diskusi/screen/forum_form.dart';
 import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
 
 class ForumPage extends StatefulWidget {

@@ -1,9 +1,9 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:ulasbuku_mobile/screens/landing_page/menu.dart';
+import 'package:ulasbuku_mobile/screens/menu.dart';
 import 'package:ulasbuku_mobile/screens/see_books.dart';
-import 'package:ulasbuku_mobile/screens/forum_diskusi/see_forums.dart';
+import 'package:ulasbuku_mobile/forum_diskusi/screen/see_forums.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({Key? key});

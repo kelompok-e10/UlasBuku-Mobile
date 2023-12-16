@@ -1,10 +1,10 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, prefer_const_constructors, sort_child_properties_last
 
-import 'package:ulasbuku_mobile/screens/landing_page/menu.dart';
+import 'package:ulasbuku_mobile/screens/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:ulasbuku_mobile/screens/landing_page/register.dart';
+import 'package:ulasbuku_mobile/screens/register.dart';
 
 void main() {
   runApp(const LoginApp());

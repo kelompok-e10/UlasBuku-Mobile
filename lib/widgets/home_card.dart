@@ -1,12 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:ulasbuku_mobile/screens/landing_page/menu.dart';
+import 'package:ulasbuku_mobile/screens/menu.dart';
 import 'package:ulasbuku_mobile/screens/see_books.dart';
-import 'package:ulasbuku_mobile/screens/forum_diskusi/see_forums.dart';
+import 'package:ulasbuku_mobile/forum_diskusi/screen/see_forums.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:ulasbuku_mobile/screens/landing_page/login.dart';
+import 'package:ulasbuku_mobile/screens/login.dart';
 
 class UlasBukuCard extends StatelessWidget {
   final UlasBukuItems item;
