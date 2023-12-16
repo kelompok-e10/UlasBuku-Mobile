@@ -17,6 +17,7 @@ class MyHomePage extends StatelessWidget {
     backgroundColor:Color.fromRGBO(135, 148, 192, 1.0),
       appBar: AppBar(
         backgroundColor:Color.fromRGBO(1, 1, 1, 0.8),
+        foregroundColor: Colors.white,
         title: const Text(
           'UlasBuku',
           style: TextStyle(
@@ -26,7 +27,7 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
       ),
-      drawer: const LeftDrawer(),
+      drawer: const LeftDrawer() ,
       body: SingleChildScrollView(
         // Widget wrapper yang dapat discroll
         child: Padding(
