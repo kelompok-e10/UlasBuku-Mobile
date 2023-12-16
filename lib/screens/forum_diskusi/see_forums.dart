@@ -1,18 +1,23 @@
+// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:ulasbuku_mobile/models/book.dart';
-import 'package:ulasbuku_mobile/screens/forum_diskusi/see_forums.dart';
+import 'package:ulasbuku_mobile/models/forum.dart';
+import 'package:ulasbuku_mobile/screens/forum_diskusi/forum_form.dart';
 import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
 
+class ForumPage extends StatefulWidget {
+  const ForumPage({Key? key}) : super(key: key);
 
-class DetailProductPage extends StatelessWidget {
-  const DetailProductPage({Key? key, required this.id}) : super(key: key);
-  final int id;
+  @override
+  _ForumPageState createState() => _ForumPageState();
+}
 
-  Future<List<Book>> fetchProduct() async {
+class _ForumPageState extends State<ForumPage> {
+  Future<List<Forum>> fetchForum() async {
     var url = Uri.parse(
-        'http://127.0.0.1:8000/json/${id}');
+        'http://127.0.0.1:8000/forum_discussion/get_header_json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -22,25 +27,50 @@ class DetailProductPage extends StatelessWidget {
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
     // melakukan konversi data json menjadi object Product
-    List<Book> list_product = [];
+    List<Forum> listForum = [];
     for (var d in data) {
       if (d != null) {
-        list_product.add(Book.fromJson(d));
+        listForum.add(Forum.fromJson(d));
       }
     }
-    return list_product;
+    return listForum;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Detail Product'),
+      backgroundColor:Color.fromRGBO(135, 148, 192, 1.0),
+      appBar: AppBar(
+        backgroundColor:Color.fromRGBO(1, 1, 1, 0.8),
+        title: const Text(
+          'Forum Diskusi',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30.0,
+            fontWeight: FontWeight.bold,
+          ),
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
         drawer: const LeftDrawer(),
         body: FutureBuilder(
-            future: fetchProduct(),
+            future: fetchForum(),
             builder: (context, AsyncSnapshot snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
+              );
+            } else if (!snapshot.hasData || snapshot.data.isEmpty) {
+              return const Center(
+                child: Text(
+                  'Tidak ada data forum.',
+                  style: TextStyle(color: Color(0xff59A5D8), fontSize: 20),
+                ),
+              );
+            } 
+              
               if (snapshot.data == null) {
                 return const Center(child: CircularProgressIndicator());
               } else {
@@ -67,27 +97,26 @@ class DetailProductPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "${snapshot.data![index].fields.bookTitle}",
+                              "${snapshot.data![index].fields.bookInfo.bookTitle}",
                               style: const TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             const SizedBox(height: 10),
-                            Text("Author: ${snapshot.data![index].fields.bookAuthor}"),
+                            Text("${snapshot.data![index].fields.rating}"),
                             const SizedBox(height: 10),
-                            Text("Published on: ${snapshot.data![index].fields.yearOfPublication}"),
+                            Text("${snapshot.data![index].fields.review}"),
                             const SizedBox(height: 10),
-                            // Text(
-                            //     "${snapshot.data![index].fields.publisher}"),
+
                             ElevatedButton(
                               onPressed: () async {
                                 Navigator.pushReplacement(
                                   context,
-                                  MaterialPageRoute(builder: (context) => const ForumPage()),
+                                  MaterialPageRoute(builder: (context) => const ForumFormPage()),
                                 );
                               },
-                              child: const Text('Kembali'),
+                              child: const Text('Tambahkan Diskusi'),
                             ),
                           ],
                         ),

@@ -1,15 +1,17 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:ulasbuku_mobile/screens/shoplist_form.dart';
-import 'package:ulasbuku_mobile/screens/menu.dart';
-import 'package:ulasbuku_mobile/screens/see_products.dart';
+import 'package:ulasbuku_mobile/screens/landing_page/menu.dart';
+import 'package:ulasbuku_mobile/screens/see_books.dart';
+import 'package:ulasbuku_mobile/screens/forum_diskusi/see_forums.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:ulasbuku_mobile/screens/login.dart';
+import 'package:ulasbuku_mobile/screens/landing_page/login.dart';
 
-class ShoplistCard extends StatelessWidget {
-  final ShoplistItem item;
+class UlasBukuCard extends StatelessWidget {
+  final UlasBukuItems item;
 
-  const ShoplistCard(this.item, {super.key}); // Constructor
+  const UlasBukuCard(this.item, {super.key}); // Constructor
 
   @override
   Widget build(BuildContext context) {
@@ -27,22 +29,25 @@ class ShoplistCard extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}")));
-          if (item.name == "Tambah Item") {
+          if (item.name == "Forum Diskusi") {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ProductFormPage()));
+                MaterialPageRoute(builder: (context) => const ForumPage()));
           }
-          else if (item.name == "Lihat Item") {
+          else if (item.name == "Lihat Buku") {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ProductPage()));
+                MaterialPageRoute(builder: (context) => const BookPage()));
+          }
+          else if (item.name == "Pesan") {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ForumPage()));
           }
           else if (item.name == "Logout") {
             final response = await request.logout(
                 "http://10.0.2.2:8000/auth/logout/");
             String message = response["message"];
             if (response['status']) {
-              String uname = response["username"];
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text("$message Sampai jumpa, $uname."),
+                content: Text(message),
               ));
               Navigator.pushReplacement(
                 context,
@@ -50,7 +55,7 @@ class ShoplistCard extends StatelessWidget {
               );
             } else {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text("$message"),
+                content: Text(message),
               ));
             }
           }
