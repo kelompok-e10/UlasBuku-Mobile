@@ -2,9 +2,16 @@ import 'package:ulasbuku_mobile/screens/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:ulasbuku_mobile/send_messages/pages/users_page.dart';
 
 void main() {
-  runApp(const LoginApp());
+  runApp(
+      const LoginApp()
+  );
+}
+
+class LoggedIn {
+  static Map<String, String> user_data = {};
 }
 
 class LoginApp extends StatelessWidget {
@@ -36,6 +43,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
@@ -76,6 +84,8 @@ class _LoginPageState extends State<LoginPage> {
                 if (request.loggedIn) {
                   String message = response['message'];
                   String uname = response['username'];
+                  LoggedIn.user_data['username'] = uname;
+                  LoggedIn.user_data['password'] = password;
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => MyHomePage()),
