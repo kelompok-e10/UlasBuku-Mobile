@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:ulasbuku_mobile/profile_page/see_profile.dart';
 
 import 'package:ulasbuku_mobile/screens/menu.dart';
 import 'package:ulasbuku_mobile/screens/see_books.dart';
@@ -52,6 +53,24 @@ class LeftDrawer extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => MyHomePage(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.forum_rounded, color: Colors.black),
+              title: const Text(
+                'Profile',
+                style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                    ),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProfilePage(),
                   ),
                 );
               },

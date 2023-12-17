@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:ulasbuku_mobile/profile_page/see_profile.dart';
 import 'package:ulasbuku_mobile/screens/menu.dart';
 import 'package:ulasbuku_mobile/screens/see_books.dart';
 import 'package:ulasbuku_mobile/forum_diskusi/screen/see_forums.dart';
@@ -31,7 +32,11 @@ class UlasBukuCard extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}")));
-          if (item.name == "Forum Diskusi") {
+          if (item.name == "Lihat Profile") {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ProfilePage()));
+          }
+          else if (item.name == "Forum Diskusi") {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ForumPage()));
           }
