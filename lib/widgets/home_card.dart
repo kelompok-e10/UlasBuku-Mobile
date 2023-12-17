@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:ulasbuku_mobile/profile_page/see_profile.dart';
+import 'package:ulasbuku_mobile/profile_page/screen/see_profile.dart';
 import 'package:ulasbuku_mobile/screens/menu.dart';
 import 'package:ulasbuku_mobile/screens/see_books.dart';
 import 'package:ulasbuku_mobile/forum_diskusi/screen/see_forums.dart';
