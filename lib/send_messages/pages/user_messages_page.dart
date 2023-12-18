@@ -156,6 +156,16 @@ class _ChatPageState extends State<ChatPage> {
                     ),
                   ),
                   SizedBox(
+                      width: 10),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(50.0),
+                    child: Icon(
+                      Icons.account_circle,
+                      size: 60.0,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  SizedBox(
                     width: 10.0,
                   ),
                   Text(
