@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:ulasbuku_mobile/profile_page/model/profile.dart';
 import 'package:ulasbuku_mobile/screens/login.dart';
 import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
+import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -10,6 +13,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,30 +31,159 @@ class _ProfilePageState extends State<ProfilePage> {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       drawer: const LeftDrawer(),
-      body: Center(
-        child: Card(
-          margin: const EdgeInsets.all(16.0),
-          color: Colors.grey[200],
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Display the username
-                Text(
-                  '${LoggedIn.user_data['username']!}',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20.0,
+      body: Column(
+        children: [
+          const Expanded(flex: 2, child: _TopPortion()),
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Text(
+                    LoggedIn.user_data['username']!,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        ?.copyWith(fontWeight: FontWeight.bold),
                   ),
-                ),
-                // Add other profile information or widgets as needed
-              ],
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FloatingActionButton.extended(
+                        onPressed: () {},
+                        heroTag: 'profile',
+                        elevation: 0,
+                        backgroundColor: Colors.white,
+                        label: const Text("Edit Profile Info"),
+                        icon: const Icon(Icons.description),
+                      ),
+                    ],
+                  ),
+                  const _ProfileInfo()
+                ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
 }
+
+class _ProfileInfo extends StatelessWidget {
+  const _ProfileInfo({Key? key}) : super(key: key);
+
+  Future<Profile> fetchProfile() async {
+    String username = LoggedIn.user_data['username']!;
+    var url = Uri.parse('http://127.0.0.1:8000/user_profile/$username/get_json/');
+    var response = await http.get(
+      url,
+      headers: {"Content-Type": "application/json"},
+    );
+
+    // Decode response directly into a Map
+    var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+    // Assuming the response contains a single profile, not a list
+    return Profile.fromJson(data);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: fetchProfile(),
+      builder: (context, AsyncSnapshot<Profile> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          // Data has been loaded successfully
+          Profile profile = snapshot.data!;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                '${profile.description}',
+                style: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        ?.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'First Name: ${profile.profileData.firstName} ',
+                style: TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Last Name: ${profile.profileData.lastName} ',
+                style: TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Contact: ${profile.profileData.contact}',
+                style: TextStyle(fontSize: 18),
+              ),
+              // Add more fields as needed
+            ],
+          );
+        }
+      },
+    );
+  }
+}
+
+class _TopPortion extends StatelessWidget {
+  const _TopPortion({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(bottom: 50),
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [Color(0xff0043ba), Color(0xff006df1)]),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(50),
+                bottomRight: Radius.circular(50),
+              )),
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: SizedBox(
+            width: 150,
+            height: 150,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.black,
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.person,
+                      size: 80,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+

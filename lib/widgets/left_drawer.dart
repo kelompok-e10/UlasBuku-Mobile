@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ulasbuku_mobile/profile_page/screen/see_profile.dart';
 import 'package:ulasbuku_mobile/screens/menu.dart';
 import 'package:ulasbuku_mobile/screens/search_book.dart';
 import 'package:ulasbuku_mobile/screens/see_books.dart';
@@ -57,7 +58,19 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.shopping_basket),
+            leading: const Icon(Icons.person),
+            title: const Text('Profile'),
+            // route ke halaman profile
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProfilePage(),
+                  ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.person),
             title: const Text('Lihat Produk'),
             onTap: () {
               // Route menu ke halaman produk

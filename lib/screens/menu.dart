@@ -6,6 +6,7 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
   final List<UlasBukuItems> items = [
+    UlasBukuItems("Lihat Profile", Icons.person),
     UlasBukuItems("Forum Diskusi", Icons.forum_rounded),
     UlasBukuItems("Lihat Buku", Icons.book),
     UlasBukuItems("Cari Buku", Icons.search),
