@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:ulasbuku_mobile/onboarding_screen/onboarding_screen1.dart';
+import 'package:ulasbuku_mobile/screens/login.dart';
 // import 'package:ulasbuku_mobile/screens/login.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -21,14 +24,14 @@ class MyApp extends StatelessWidget {
         CookieRequest request = CookieRequest();
         return request;
       },
-      child: MaterialApp(
+      child: GetMaterialApp(
           title: 'Ulas Buku Mobile',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(
                 seedColor: Color.fromRGBO(135, 148, 192, 1.0)),
             useMaterial3: true,
           ),
-          home: LoginPage()),
+          home: OnboardingScreen1()),
     );
   }
 }
