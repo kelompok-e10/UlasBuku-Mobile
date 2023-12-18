@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:ulasbuku_mobile/models/book.dart';
 import 'dart:ui' as ui;
 import 'dart:async';
