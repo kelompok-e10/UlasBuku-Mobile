@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
-import 'package:ulasbuku_mobile/widgets/shop_card.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
+import 'package:ulasbuku_mobile/widgets/home_card.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
-  final List<ShoplistItem> items = [
-    ShoplistItem("Cari Item", Icons.checklist),
-    ShoplistItem("Lihat Item", Icons.add_shopping_cart),
-    ShoplistItem("Logout", Icons.logout),
+  final List<UlasBukuItems> items = [
+    UlasBukuItems("Forum Diskusi", Icons.forum_rounded),
+    UlasBukuItems("Lihat Buku", Icons.book),
+    UlasBukuItems("Cari Buku", Icons.search),
+    UlasBukuItems("Pesan", Icons.message),
+    UlasBukuItems("Log Out", Icons.logout)
   ];
 
   @override
@@ -25,6 +30,7 @@ class MyHomePage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       drawer: const LeftDrawer(),
       body: SingleChildScrollView(
@@ -63,7 +69,7 @@ class MyHomePage extends StatelessWidget {
                 mainAxisSpacing: 20,
                 crossAxisCount: 4,
                 shrinkWrap: true,
-                children: items.map((ShoplistItem item) {
+                children: items.map((UlasBukuItems item) {
                   // Iterasi untuk setiap item
                   return UlasBukuCard(item);
                 }).toList(),
@@ -76,9 +82,9 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class ShoplistItem {
+class UlasBukuItems {
   final String name;
   final IconData icon;
 
-  ShoplistItem(this.name, this.icon);
+  UlasBukuItems(this.name, this.icon);
 }

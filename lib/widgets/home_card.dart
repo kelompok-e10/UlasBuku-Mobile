@@ -8,6 +8,7 @@ import 'package:ulasbuku_mobile/forum_diskusi/screen/see_forums.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:ulasbuku_mobile/screens/login.dart';
+import 'package:ulasbuku_mobile/screens/shoplist_form.dart';
 
 import '../send_messages/pages/users_page.dart';
 
@@ -42,7 +43,10 @@ class UlasBukuCard extends StatelessWidget {
           }
           else if (item.name == "Lihat Buku") {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const BookPage()));
+                MaterialPageRoute(builder: (context) => const ProductPage()));
+          }else if (item.name == "Cari Buku"){
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ProductSearchPage()));
           }
           else if (item.name == "Pesan") {
             Navigator.push(context,
