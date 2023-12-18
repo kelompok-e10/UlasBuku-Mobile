@@ -51,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         onPressed: () {},
                         heroTag: 'profile',
                         elevation: 0,
-                        backgroundColor: Colors.red,
+                        backgroundColor: Colors.white,
                         label: const Text("Edit Profile Info"),
                         icon: const Icon(Icons.description),
                       ),

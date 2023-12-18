@@ -60,7 +60,7 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.person),
             title: const Text('Profile'),
-            // Bagian redirection ke ShopFormPage
+            // route ke halaman profile
             onTap: () {
               Navigator.pushReplacement(
                   context,
