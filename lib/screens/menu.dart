@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
 import 'package:ulasbuku_mobile/widgets/shop_card.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
@@ -61,13 +59,13 @@ class MyHomePage extends StatelessWidget {
                 // Container pada card kita.
                 primary: true,
                 padding: const EdgeInsets.all(20),
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 3,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+                crossAxisCount: 4,
                 shrinkWrap: true,
                 children: items.map((ShoplistItem item) {
                   // Iterasi untuk setiap item
-                  return ShoplistCard(item);
+                  return UlasBukuCard(item);
                 }).toList(),
               ),
             ],
