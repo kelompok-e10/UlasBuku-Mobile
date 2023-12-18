@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:ulasbuku_mobile/profile_page/model/profile.dart';
 import 'package:ulasbuku_mobile/screens/login.dart';
 import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
+import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -10,6 +13,32 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
+  Future<List<Profile>> fetchProfile() async {
+      // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
+
+      String username = LoggedIn.user_data['username']!;
+      var url = Uri.parse(
+          'http://127.0.0.1:8000/user_profile/$username/get_json/');
+      var response = await http.get(
+          url,
+          headers: {"Content-Type": "application/json"},
+      );
+
+      // melakukan decode response menjadi bentuk json
+      var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+      // melakukan konversi data json menjadi object Product
+      List<Profile> list_profile = [];
+      for (var d in data) {
+          if (d != null) {
+              list_profile.add(Profile.fromJson(d));
+          }
+      }
+      return list_profile;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 children: [
                   Text(
-                    '${LoggedIn.user_data['username']!}',
+                    LoggedIn.user_data['username']!,
                     style: Theme.of(context)
                         .textTheme
                         .headline6
@@ -57,7 +86,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
                 ],
               ),
             ),
