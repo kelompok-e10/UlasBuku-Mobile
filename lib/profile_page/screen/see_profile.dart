@@ -14,31 +14,6 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
 
-  Future<List<Profile>> fetchProfile() async {
-      // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-
-      String username = LoggedIn.user_data['username']!;
-      var url = Uri.parse(
-          'http://127.0.0.1:8000/user_profile/$username/get_json/');
-      var response = await http.get(
-          url,
-          headers: {"Content-Type": "application/json"},
-      );
-
-      // melakukan decode response menjadi bentuk json
-      var data = jsonDecode(utf8.decode(response.bodyBytes));
-
-      // melakukan konversi data json menjadi object Product
-      List<Profile> list_profile = [];
-      for (var d in data) {
-          if (d != null) {
-              list_profile.add(Profile.fromJson(d));
-          }
-      }
-      return list_profile;
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,12 +61,77 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ],
                   ),
+                  const _ProfileInfo()
                 ],
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _ProfileInfo extends StatelessWidget {
+  const _ProfileInfo({Key? key}) : super(key: key);
+
+  Future<Profile> fetchProfile() async {
+    String username = LoggedIn.user_data['username']!;
+    var url = Uri.parse('http://127.0.0.1:8000/user_profile/$username/get_json/');
+    var response = await http.get(
+      url,
+      headers: {"Content-Type": "application/json"},
+    );
+
+    // Decode response directly into a Map
+    var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+    // Assuming the response contains a single profile, not a list
+    return Profile.fromJson(data);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: fetchProfile(),
+      builder: (context, AsyncSnapshot<Profile> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          // Data has been loaded successfully
+          Profile profile = snapshot.data!;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                '${profile.description}',
+                style: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        ?.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'First Name: ${profile.profileData.firstName} ',
+                style: TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Last Name: ${profile.profileData.lastName} ',
+                style: TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Contact: ${profile.profileData.contact}',
+                style: TextStyle(fontSize: 18),
+              ),
+              // Add more fields as needed
+            ],
+          );
+        }
+      },
     );
   }
 }
@@ -145,3 +185,5 @@ class _TopPortion extends StatelessWidget {
     );
   }
 }
+
+
