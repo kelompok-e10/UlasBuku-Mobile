@@ -167,13 +167,13 @@ class _TopPortion extends StatelessWidget {
                 Container(
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                   child: Center(
                     child: Icon(
                       Icons.person,
                       size: 80,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 ),
