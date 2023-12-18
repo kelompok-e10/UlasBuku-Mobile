@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ulasbuku_mobile/screens/menu.dart';
-import 'package:ulasbuku_mobile/screens/shoplist_form.dart';
+import 'package:ulasbuku_mobile/screens/search_book.dart';
 import 'package:ulasbuku_mobile/screens/see_books.dart';
 import 'package:ulasbuku_mobile/forum_diskusi/screen/see_forums.dart';
 import 'package:ulasbuku_mobile/send_messages/pages/users_page.dart';
@@ -52,7 +52,7 @@ class LeftDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ProductSearchPage(),
+                    builder: (context) => BookSearchPage(),
                   ));
             },
           ),

@@ -16,8 +16,8 @@ class ForumPage extends StatefulWidget {
 
 class _ForumPageState extends State<ForumPage> {
   Future<List<Forum>> fetchForum() async {
-    var url = Uri.parse(
-        'http://127.0.0.1:8000/forum_discussion/get_header_json/');
+    var url =
+        Uri.parse('http://127.0.0.1:8000/forum_discussion/get_header_json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -28,7 +28,7 @@ class _ForumPageState extends State<ForumPage> {
     // melakukan decode response menjadi bentuk json
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
-    // melakukan konversi data json menjadi object Product
+    // melakukan konversi data json menjadi object book
     List<Forum> listForum = [];
     for (var d in data) {
       if (d != null) {
@@ -79,7 +79,8 @@ class _ForumPageState extends State<ForumPage> {
                 return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (_, index) => Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
                     padding: const EdgeInsets.all(20.0),
                     color: Color.fromRGBO(234, 242, 215, 1),
                     child: Column(
@@ -94,7 +95,8 @@ class _ForumPageState extends State<ForumPage> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        Image.network("${snapshot.data![index].bookInfo.imageUrlS}"),
+                        Image.network(
+                            "${snapshot.data![index].bookInfo.imageUrlS}"),
                         const SizedBox(height: 10),
                         Text("${snapshot.data![index].rating}"),
                         const SizedBox(height: 10),
@@ -113,7 +115,8 @@ class _ForumPageState extends State<ForumPage> {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const ForumFormPage()),
+                  MaterialPageRoute(
+                      builder: (context) => const ForumFormPage()),
                 );
               },
               child: const Text('Tambahkan Diskusi'),

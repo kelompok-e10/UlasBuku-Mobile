@@ -8,7 +8,7 @@ import 'package:ulasbuku_mobile/forum_diskusi/screen/see_forums.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:ulasbuku_mobile/screens/login.dart';
-import 'package:ulasbuku_mobile/screens/shoplist_form.dart';
+import 'package:ulasbuku_mobile/screens/search_book.dart';
 
 import '../send_messages/pages/users_page.dart';
 
@@ -36,25 +36,21 @@ class UlasBukuCard extends StatelessWidget {
           if (item.name == "Lihat Profile") {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ProfilePage()));
-          }
-          else if (item.name == "Forum Diskusi") {
+          } else if (item.name == "Forum Diskusi") {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ForumPage()));
-          }
-          else if (item.name == "Lihat Buku") {
+          } else if (item.name == "Lihat Buku") {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ProductPage()));
-          }else if (item.name == "Cari Buku"){
+          } else if (item.name == "Cari Buku") {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ProductSearchPage()));
-          }
-          else if (item.name == "Pesan") {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Home()));
-          }
-          else if (item.name == "Logout") {
-            final response = await request.logout(
-                "http://10.0.2.2:8000/auth/logout/");
+                MaterialPageRoute(builder: (context) => BookSearchPage()));
+          } else if (item.name == "Pesan") {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => const Home()));
+          } else if (item.name == "Logout") {
+            final response =
+                await request.logout("http://10.0.2.2:8000/auth/logout/");
             String message = response["message"];
             if (response['status']) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(

@@ -11,12 +11,12 @@ class ProductPage extends StatefulWidget {
   @override
   _ProductPageState createState() => _ProductPageState();
 
-  void navigateToDetailPage(Book product, BuildContext context) {
+  void navigateToDetailPage(Book book, BuildContext context) {
     // Changed from _navigateToDetailPage to navigateToDetailPage
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ProductDetailPage(product: product),
+        builder: (context) => BookDetailPage(book: book),
       ),
     );
   }
@@ -27,9 +27,9 @@ class _ProductPageState extends State<ProductPage> {
   int _currentPage = 1;
   final int _perPage = 10;
 
-  // Fetch products from the API
+  // Fetch books from the API
   Future<void> fetchProduct() async {
-    var url = Uri.parse('http://127.0.0.1:8000/api/books/');
+    var url = Uri.parse('https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/api/books/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -107,7 +107,7 @@ class _ProductPageState extends State<ProductPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      ProductDetailPage(product: _books[index]),
+                                      BookDetailPage(book: _books[index]),
                                 ),
                               );
                             },

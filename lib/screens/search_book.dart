@@ -3,14 +3,14 @@ import 'dart:convert';
 import 'package:ulasbuku_mobile/models/book.dart';
 import 'package:http/http.dart' as http;
 
-class ProductSearchPage extends StatefulWidget {
-  ProductSearchPage({Key? key}) : super(key: key);
+class BookSearchPage extends StatefulWidget {
+  BookSearchPage({Key? key}) : super(key: key);
 
   @override
-  _ProductSearchPageState createState() => _ProductSearchPageState();
+  _BookSearchPageState createState() => _BookSearchPageState();
 }
 
-class _ProductSearchPageState extends State<ProductSearchPage> {
+class _BookSearchPageState extends State<BookSearchPage> {
   List<Book> _books = [];
   List<Book> _filteredBooks = [];
   bool _sortTitleAscending = true;
@@ -19,9 +19,9 @@ class _ProductSearchPageState extends State<ProductSearchPage> {
   bool _sortYearAscending = true;
   String _currentSearchTerm = '';
 
-  // Fetch products from the API
+  // Fetch books from the API
   Future<void> fetchProduct() async {
-    var url = Uri.parse('http://127.0.0.1:8000/api/books/');
+    var url = Uri.parse('https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/api/books/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},

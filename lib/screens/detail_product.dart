@@ -3,16 +3,16 @@ import 'package:ulasbuku_mobile/models/book.dart';
 import 'dart:ui' as ui;
 import 'dart:async';
 
-class ProductDetailPage extends StatefulWidget {
-  final Book product;
+class BookDetailPage extends StatefulWidget {
+  final Book book;
 
-  const ProductDetailPage({Key? key, required this.product}) : super(key: key);
+  const BookDetailPage({Key? key, required this.book}) : super(key: key);
 
   @override
-  _ProductDetailPageState createState() => _ProductDetailPageState();
+  _BookDetailPageState createState() => _BookDetailPageState();
 }
 
-class _ProductDetailPageState extends State<ProductDetailPage> {
+class _BookDetailPageState extends State<BookDetailPage> {
   double _opacity = 0.0;
 
   Future<ui.Image> _getImage(String url) {
@@ -53,7 +53,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               Expanded(
                 flex: 3,
                 child: FutureBuilder<ui.Image>(
-                  future: _getImage(widget.product.fields.imageUrlS),
+                  future: _getImage(widget.book.fields.imageUrlS),
                   builder:
                       (BuildContext context, AsyncSnapshot<ui.Image> snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
@@ -82,7 +82,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 child: Text('No Image Available'),
                               )
                             : Image.network(
-                                widget.product.fields.imageUrlS,
+                                widget.book.fields.imageUrlS,
                                 fit: BoxFit.cover,
                               ),
                       );
@@ -100,7 +100,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Title: ${widget.product.fields.bookTitle}',
+                        'Title: ${widget.book.fields.bookTitle}',
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
@@ -109,7 +109,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        'Author: ${widget.product.fields.bookAuthor}',
+                        'Author: ${widget.book.fields.bookAuthor}',
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
@@ -118,7 +118,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        'Year of Publication: ${widget.product.fields.yearOfPublication}',
+                        'Year of Publication: ${widget.book.fields.yearOfPublication}',
                         style: const TextStyle(
                           fontSize: 18,
                           color: Colors.black54,
@@ -126,7 +126,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        'Publisher: ${widget.product.fields.publisher}',
+                        'Publisher: ${widget.book.fields.publisher}',
                         style: const TextStyle(
                           fontSize: 18,
                           color: Colors.black54,
@@ -134,7 +134,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        'ISBN: ${widget.product.fields.isbn}',
+                        'ISBN: ${widget.book.fields.isbn}',
                         style: const TextStyle(
                           fontSize: 18,
                           color: Colors.black54,
