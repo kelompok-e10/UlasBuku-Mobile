@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
-import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
 import 'package:ulasbuku_mobile/widgets/home_card.dart';
 
 class MyHomePage extends StatelessWidget {
