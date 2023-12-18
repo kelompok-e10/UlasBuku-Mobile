@@ -10,93 +10,126 @@ class ProductPage extends StatefulWidget {
 
   @override
   _ProductPageState createState() => _ProductPageState();
+
+  void navigateToDetailPage(Book product, BuildContext context) {
+    // Changed from _navigateToDetailPage to navigateToDetailPage
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProductDetailPage(product: product),
+      ),
+    );
+  }
 }
 
 class _ProductPageState extends State<ProductPage> {
-  Future<List<Book>> fetchProduct() async {
-    var url = Uri.parse(
-        'http://127.0.0.1:8000/json/');
+  final List<Book> _books = [];
+  int _currentPage = 1;
+  final int _perPage = 10;
+
+  // Fetch products from the API
+  Future<void> fetchProduct() async {
+    var url = Uri.parse('http://127.0.0.1:8000/api/books/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
     );
 
-    // melakukan decode response menjadi bentuk json
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
-    // melakukan konversi data json menjadi object Product
-    List<Book> list_product = [];
+    List<Book> listProduct = [];
     for (var d in data) {
       if (d != null) {
-        list_product.add(Book.fromJson(d));
+        listProduct.add(Book.fromJson(d));
       }
     }
-    return list_product;
+
+    // Only take the first 10 books
+    listProduct =
+        listProduct.skip((_currentPage - 1) * _perPage).take(_perPage).toList();
+
+    setState(() {
+      _books.addAll(listProduct);
+      _currentPage++;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchProduct();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Product'),
-        ),
-        drawer: const LeftDrawer(),
-        body: FutureBuilder(
-            future: fetchProduct(),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.data == null) {
-                return const Center(child: CircularProgressIndicator());
-              } else {
-                if (!snapshot.hasData) {
-                  return const Column(
-                    children: [
-                      Text(
-                        "Tidak ada data produk.",
-                        style:
-                        TextStyle(color: Color(0xff59A5D8), fontSize: 20),
+      appBar: AppBar(
+        title: const Text('Product'),
+      ),
+      drawer: const LeftDrawer(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: ListView.builder(
+                itemCount: _books.length,
+                itemBuilder: (_, index) => GestureDetector(
+                  onTap: () {
+                    widget.navigateToDetailPage(_books[index], context);
+                  },
+                  child: Card(
+                    color: Colors.accents[index % 10], // Add this
+                    elevation: 5,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "${_books[index].fields.bookTitle}",
+                            style: const TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text("${_books[index].fields.bookAuthor}"),
+                          const SizedBox(height: 10),
+                          Text("${_books[index].fields.yearOfPublication}"),
+                          const SizedBox(height: 10),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ProductDetailPage(product: _books[index]),
+                                ),
+                              );
+                            },
+                            child: const Text('See Details'),
+                          )
+                        ],
                       ),
-                      SizedBox(height: 8),
-                    ],
-                  );
-                } else {
-                  return ListView.builder(
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (_, index) => Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 12),
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "${snapshot.data![index].fields.bookTitle}",
-                              style: const TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Text("${snapshot.data![index].fields.bookAuthor}"),
-                            const SizedBox(height: 10),
-                            Text("${snapshot.data![index].fields.yearOfPublication}"),
-                            const SizedBox(height: 10),
-                            // Text(
-                            //     "${snapshot.data![index].fields.publisher}"),
-                            ElevatedButton(
-                              onPressed: () async {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => DetailProductPage(id: snapshot.data![index].pk)),
-                                );
-                              },
-                              child: const Text('Detail Product'),
-                            ),
-                          ],
-                        ),
-                      ));
-                }
-              }
-            }));
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                child: Text('Load more'),
+                onPressed: fetchProduct,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

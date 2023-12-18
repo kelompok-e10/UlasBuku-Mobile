@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
 import 'package:ulasbuku_mobile/widgets/shop_card.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
   final List<ShoplistItem> items = [
-    ShoplistItem("Lihat Item", Icons.checklist),
-    ShoplistItem("Tambah Item", Icons.add_shopping_cart),
+    ShoplistItem("Cari Item", Icons.checklist),
+    ShoplistItem("Lihat Item", Icons.add_shopping_cart),
     ShoplistItem("Logout", Icons.logout),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    backgroundColor:Color.fromRGBO(135, 148, 192, 1.0),
+      backgroundColor: const Color.fromRGBO(135, 148, 192, 1.0),
       appBar: AppBar(
-        backgroundColor:Color.fromRGBO(1, 1, 1, 0.8),
+        backgroundColor: const Color.fromRGBO(1, 1, 1, 0.8),
         title: const Text(
           'UlasBuku',
           style: TextStyle(
@@ -47,13 +49,13 @@ class MyHomePage extends StatelessWidget {
                 ),
               ),
               const Text(
-                  'Tentukan inspirasi bacamu segera!',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.normal,
-                  ),
+                'Tentukan inspirasi bacamu segera!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.normal,
                 ),
+              ),
               // Grid layout
               GridView.count(
                 // Container pada card kita.

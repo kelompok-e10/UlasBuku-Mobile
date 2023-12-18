@@ -27,17 +27,15 @@ class ShoplistCard extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}")));
-          if (item.name == "Tambah Item") {
+          if (item.name == "Cari Item") {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ProductFormPage()));
-          }
-          else if (item.name == "Lihat Item") {
+                MaterialPageRoute(builder: (context) => ProductSearchPage()));
+          } else if (item.name == "Lihat Item") {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ProductPage()));
-          }
-          else if (item.name == "Logout") {
-            final response = await request.logout(
-                "http://10.0.2.2:8000/auth/logout/");
+          } else if (item.name == "Logout") {
+            final response =
+                await request.logout("http://10.0.2.2:8000/auth/logout/");
             String message = response["message"];
             if (response['status']) {
               String uname = response["username"];
@@ -50,7 +48,7 @@ class ShoplistCard extends StatelessWidget {
               );
             } else {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text("$message"),
+                content: Text(message),
               ));
             }
           }

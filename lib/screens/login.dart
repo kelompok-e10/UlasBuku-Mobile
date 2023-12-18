@@ -68,7 +68,8 @@ class _LoginPageState extends State<LoginPage> {
                 // Cek kredensial
                 // Untuk menyambungkan Android emulator dengan Django pada localhost,
                 // gunakan URL http://10.0.2.2/
-                final response = await request.login("http://127.0.0.1:8000/auth/login/", {
+                final response =
+                    await request.login("http://127.0.0.1:8000/auth/login/", {
                   'username': username,
                   'password': password,
                 });
@@ -82,15 +83,14 @@ class _LoginPageState extends State<LoginPage> {
                   );
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()
-                    ..showSnackBar(
-                        SnackBar(content: Text("$message Selamat datang, $uname.")));
+                    ..showSnackBar(SnackBar(
+                        content: Text("$message Selamat datang, $uname.")));
                 } else {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
                       title: const Text('Login Gagal'),
-                      content:
-                      Text(response['message']),
+                      content: Text(response['message']),
                       actions: [
                         TextButton(
                           child: const Text('OK'),

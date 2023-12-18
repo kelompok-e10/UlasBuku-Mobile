@@ -14,13 +14,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Provider(
       create: (_) {
+        // Use the 'CookieRequest' class
         CookieRequest request = CookieRequest();
         return request;
       },
       child: MaterialApp(
           title: 'Ulas Buku Mobile',
           theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(135, 148, 192, 1.0)),            useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(
+                seedColor: Color.fromRGBO(135, 148, 192, 1.0)),
+            useMaterial3: true,
           ),
           home: const LoginPage()),
     );
