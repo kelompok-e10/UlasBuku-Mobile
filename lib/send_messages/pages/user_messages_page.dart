@@ -128,7 +128,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     return Scaffold(
-      backgroundColor: Color(0xFF553370),
+      backgroundColor: Colors.blueAccent,
       body: Container(
         padding: EdgeInsets.only(top: 60.0),
         child: Stack(
@@ -154,16 +154,16 @@ class _ChatPageState extends State<ChatPage> {
                     },
                     child: Icon(
                       Icons.arrow_back_ios_new_outlined,
-                      color: Color(0Xffc199cd),
+                      color: Colors.white,
                     ),
                   ),
                   SizedBox(
                       width: 10),
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(50.0),
+                    borderRadius: BorderRadius.circular(40.0),
                     child: Icon(
                       Icons.account_circle,
-                      size: 60.0,
+                      size: 50.0,
                       color: Colors.grey,
                     ),
                   ),

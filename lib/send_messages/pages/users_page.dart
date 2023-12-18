@@ -108,7 +108,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF553370),
+      backgroundColor: Colors.blueAccent,
       body: Column(
         children: [
           Padding(
@@ -145,7 +145,7 @@ class _HomeState extends State<Home> {
                     },
                     child: Icon(
                       Icons.arrow_back_ios_new_outlined,
-                      color: Color(0Xffc199cd),
+                      color: Colors.white,
                     ),
                   ),
                   SizedBox(

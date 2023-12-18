@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -34,9 +33,9 @@ class _OnbordingState extends State<OnboardingScreen1> {
               padding: const EdgeInsets.all(40),
               child: Column(
                 children: [
-                  SvgPicture.asset(
-                    "assets/onboarding_screen1.jpeg",
-                    height: 300,
+                  Image.asset(
+                    "assets/onboarding_image1.png",
+                    height: 350,
                   ),
                   Text(
                     "Selamat Datang di UlasBuku!",
@@ -60,24 +59,33 @@ class _OnbordingState extends State<OnboardingScreen1> {
               alignment: Alignment.bottomRight,
               child: GestureDetector(
                 onTap: (){
-                  Get.to(() => OnboardingScreen2, transition: Transition.fade,
-                  duration: Duration(seconds: 2));
+                  Get.to(() => OnboardingScreen2(), transition: Transition.fadeIn,
+                  duration: Duration(seconds: 1));
                 },
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "Next",
-                      style: TextStyle(
-                        color: Colors.grey,
-                      )
+                   ElevatedButton(
+                      onPressed: () {
+                        Get.to(() => OnboardingScreen2(), transition: Transition.fade, duration: Duration(seconds: 1));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.orange, 
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          'Next',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white
+                          ),
+                        ),
+                      ),
                     ),
-                    SizedBox(width: 10,),
-                    Icon(
-                      Icons.arrow_right_outlined,
-                      color: Colors.grey,
-                    )
                   ],
-                )
+                ),
               )
             )
           ],

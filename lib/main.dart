@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
                 seedColor: Color.fromRGBO(135, 148, 192, 1.0)),
             useMaterial3: true,
           ),
-          home: LoginPage()),
+          home: OnboardingScreen1()),
     );
   }
 }

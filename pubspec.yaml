@@ -59,8 +59,8 @@ dev_dependencies:
 flutter:
   assets:
     - assets/background.png
-    - assets/onboarding_screen1.jpeg
-    - assets/onboarding_screen2.jpeg
+    - assets/onboarding_image1.png
+    - assets/onboarding_image2.png
     - assets/images/Logo UlasBuku.png
     - assets/UlasBuku.png
 
