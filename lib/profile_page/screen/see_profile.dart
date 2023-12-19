@@ -4,6 +4,7 @@ import 'package:ulasbuku_mobile/profile_page/model/profile.dart';
 import 'package:ulasbuku_mobile/screens/login.dart';
 import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
 import 'package:http/http.dart' as http;
+import 'package:ulasbuku_mobile/profile_page/screen/profileinfo_form.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -13,7 +14,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +52,17 @@ class _ProfilePageState extends State<ProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FloatingActionButton.extended(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ProfileInfoFormPage(),
+                            ),
+                          ).then((value) {
+                            // This code will be executed when the _ProfileInfoFormPage is popped
+                            // You can fetch and update the profile data here if needed
+                          });
+                        },
                         heroTag: 'profile',
                         elevation: 0,
                         backgroundColor: Colors.white,
