@@ -25,7 +25,7 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   TextEditingController messageController = TextEditingController();
-  Map<String, String> userLoggedIn = LoggedIn.user_data;
+  Map<String, String> userLoggedIn = LoggedIn.userData;
 
   @override
   Widget chatMessageTile(String message, bool sendByMe) {
@@ -65,7 +65,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget chatMessage() {
     return FutureBuilder<List<Messages>>(
       future: fetchMessages(
-          LoggedIn.user_data['username']!, widget.selectedUsername),
+          LoggedIn.userData['username']!, widget.selectedUsername),
       builder: (context, AsyncSnapshot<List<Messages>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(

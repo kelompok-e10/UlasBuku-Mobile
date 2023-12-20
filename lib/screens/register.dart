@@ -207,9 +207,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       String password = _passwordController.text;
                       String passwordConfirmation =
                           _passwordConfirmationController.text;
-                      print("JAMAL");
                       // Kirim ke Django dan tunggu respons
-                      // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                       final response = await request.postJson(
                           "https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/auth/register/",
                           jsonEncode(<String, String>{

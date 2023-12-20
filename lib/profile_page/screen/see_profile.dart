@@ -41,7 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 children: [
                   Text(
-                    LoggedIn.user_data['username']!,
+                    LoggedIn.userData['username']!,
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge
@@ -86,7 +86,7 @@ class _ProfileInfo extends StatelessWidget {
   const _ProfileInfo({Key? key}) : super(key: key);
 
   Future<Profile> fetchProfile() async {
-    String username = LoggedIn.user_data['username']!;
+    String username = LoggedIn.userData['username']!;
     var url = Uri.parse(
         'https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/user_profile/$username/get_json/');
     var response = await http.get(

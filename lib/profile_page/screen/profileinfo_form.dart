@@ -21,7 +21,7 @@ class _ProfileInfoFormPageState extends State<ProfileInfoFormPage> {
   String description = '';
 
   Future<bool> updateProfileOnServer(Map<String, dynamic> data) async {
-    String username = LoggedIn.user_data['username']!;
+    String username = LoggedIn.userData['username']!;
     String url =
         'https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/user_profile/$username/update_profile_flutter/';
 
@@ -37,19 +37,15 @@ class _ProfileInfoFormPageState extends State<ProfileInfoFormPage> {
       if (response.statusCode == 200) {
         return true;
       } else {
-        print('HTTP Error: ${response.statusCode}');
         return false;
       }
     } catch (e) {
-      print('Exception: $e');
       return false;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
-
     return Scaffold(
       backgroundColor: const Color.fromRGBO(135, 148, 192, 1.0),
       appBar: AppBar(

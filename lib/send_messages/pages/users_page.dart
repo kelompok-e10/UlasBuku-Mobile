@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
 
   Future<List<UserInfo>> fetchUserData() async {
     Map<String, dynamic> data =
-        await fetchUserInfo(LoggedIn.user_data['username']!);
+        await fetchUserInfo(LoggedIn.userData['username']!);
     userInfoList.clear();
     data.forEach((key, value) {
       UserInfo userInfo = UserInfo.fromJson(value);

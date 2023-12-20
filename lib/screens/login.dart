@@ -11,7 +11,7 @@ void main() {
 }
 
 class LoggedIn {
-  static Map<String, String> user_data = {};
+  static Map<String, String> userData = {};
 }
 
 class LoginApp extends StatelessWidget {
@@ -154,8 +154,8 @@ class _LoginPageState extends State<LoginPage> {
                     if (request.loggedIn) {
                       String message = response['message'];
                       String uname = response['username'];
-                      LoggedIn.user_data['username'] = uname;
-                      LoggedIn.user_data['password'] = password;
+                      LoggedIn.userData['username'] = uname;
+                      LoggedIn.userData['password'] = password;
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => MyHomePage()),
