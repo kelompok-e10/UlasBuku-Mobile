@@ -31,10 +31,9 @@ Data buku akan diambil dari API yang telah dibuat pada tugas kelompok yang diker
 Aplikasi **UlasBuku** akan memiliki beberapa peran pengguna beserta deskripsinya:
 
 1. **Unregistered User**: Pengguna yang belum mendaftar atau login.
+   - Melakukan login.
+   - Melakukan registrasi.
 
-   - Melihat forum buku.
-   - Melihat daftar buku yang ada.
-   - Melihat rekomendasi buku di homepage.
 
 2. **Registered/Login User**: Pengguna yang telah mendaftar dan login.
    - Melihat forum buku.
@@ -124,6 +123,10 @@ Jangan ragu untuk menghubungi kami jika Anda memerlukan bantuan atau memiliki pe
 # Tautan Berita Acara
 
 Tautan berita acara dapat dilihat pada [tautan berikut](https://docs.google.com/spreadsheets/d/17apHL7ozM74HWTzj6h73pk9-J-Uv__YU/edit#gid=2005070693)
+
+# Tautan APK
+
+APK UlasBuku dapat diakses melalui [tautan berikut]()
 
 ## Lisensi
 
