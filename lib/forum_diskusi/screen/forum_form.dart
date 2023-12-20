@@ -46,12 +46,17 @@ class _ForumFormPageState extends State<ForumFormPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(20.0),
+                    child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: const Color(0xFFFFFFFF)),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
                     child: TextFormField(
                       decoration: InputDecoration(
                         hintText: "Judul Buku",
                         labelText: "Judul Buku",
-                        fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
@@ -69,13 +74,19 @@ class _ForumFormPageState extends State<ForumFormPage> {
                       },
                     ),
                   ),
+                  ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(20.0),
+                    child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: const Color(0xFFFFFFFF)),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
                     child: TextFormField(
                       decoration: InputDecoration(
                         hintText: "Rating (dari 1-5)",
                         labelText: "Rating (dari 1-5)",
-                        fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
@@ -99,13 +110,19 @@ class _ForumFormPageState extends State<ForumFormPage> {
                       },
                     ),
                   ),
+                  ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(20.0),
+                    child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: const Color(0xFFFFFFFF)),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: "Ulasan",
                         labelText: "Ulasan",
-                        fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
@@ -117,12 +134,13 @@ class _ForumFormPageState extends State<ForumFormPage> {
                           _review = value;
                         });
                       },
-                ),
-              ),
+                    ),
+                  ),
+                  ),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(20.0),
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:
@@ -134,16 +152,19 @@ class _ForumFormPageState extends State<ForumFormPage> {
                               content: Text("Ulasan tidak boleh kosong!"),
                             ));
                           }
-                          else {
-                        // Perform your post request here
-                        final response = await request.postJson(
-                          "http://127.0.0.1:8000/create-flutter/",
-                          jsonEncode(<String, dynamic>{
-                            'bookTitle': _bookTitle,
-                            'rating': _rating,
-                            'review': _review,
-                          }),
-                        );
+                          else if (_formKey.currentState!.validate()){
+                          final response = await request.postJson(
+                            "http://127.0.0.1:8000/forum_discussion/create_forum_flutter/",
+                            jsonEncode(<String, dynamic>{
+                              'username': request.jsonData['username'],
+                              'password': request.jsonData['password'],
+                              'bookTitle': _bookTitle,
+                              'rating': _rating,
+                              'review': _review,
+                              'date': DateTime.now().toString(),
+                              'addedBy': request.jsonData['username'],
+                            }),
+                          );
                         if (response['status'] == 'success') {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
