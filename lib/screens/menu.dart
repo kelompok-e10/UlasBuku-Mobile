@@ -20,13 +20,25 @@ class MyHomePage extends StatelessWidget {
       backgroundColor: const Color.fromRGBO(135, 148, 192, 1.0),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(1, 1, 1, 0.8),
-        title: const Text(
-          'UlasBuku',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
-          ),
+        title: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                'assets/UlasBuku.png', // Replace with your image path
+                width: 40,
+                height: 40,
+              ),
+            ),
+            const Text(
+              'UlasBuku',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),

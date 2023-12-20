@@ -46,20 +46,8 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.add_shopping_cart),
-            title: const Text('Cari Produk'),
-            // Bagian redirection ke ShopFormPage
-            onTap: () {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BookSearchPage(),
-                  ));
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.person),
-            title: const Text('Profile'),
+            title: const Text('Lihat Profile'),
             // route ke halaman profile
             onTap: () {
               Navigator.pushReplacement(
@@ -70,18 +58,7 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.person),
-            title: const Text('Lihat Produk'),
-            onTap: () {
-              // Route menu ke halaman produk
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ProductPage()),
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.person),
+            leading: const Icon(Icons.forum_rounded),
             title: const Text('Forum Diskusi'),
             onTap: () {
               // Route menu ke halaman forum
@@ -92,7 +69,30 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.person),
+            leading: const Icon(Icons.book),
+            title: const Text('Lihat Buku'),
+            onTap: () {
+              // Route menu ke halaman produk
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProductPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.search),
+            title: const Text('Cari Buku'),
+            // Bagian redirection ke ShopFormPage
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BookSearchPage(),
+                  ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.message),
             title: const Text('Pesan'),
             onTap: () {
               // Route menu ke halaman pesan
