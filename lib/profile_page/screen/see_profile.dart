@@ -87,7 +87,8 @@ class _ProfileInfo extends StatelessWidget {
 
   Future<Profile> fetchProfile() async {
     String username = LoggedIn.user_data['username']!;
-    var url = Uri.parse('https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/user_profile/$username/get_json/');
+    var url = Uri.parse(
+        'https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/user_profile/$username/get_json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -109,7 +110,8 @@ class _ProfileInfo extends StatelessWidget {
           return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
-        } else if (snapshot.data == null || snapshot.data?.profileData == null) {
+        } else if (snapshot.data == null ||
+            snapshot.data?.profileData == null) {
           return const Center(
             child: Text(
               ' ',
@@ -119,7 +121,7 @@ class _ProfileInfo extends StatelessWidget {
         } else {
           // Data has been loaded successfully
           Profile profile = snapshot.data!;
-          
+
           return Card(
             elevation: 4,
             margin: const EdgeInsets.all(8),

@@ -1,4 +1,3 @@
-
 // ignore_for_file: must_be_immutable, override_on_non_overriding_member
 
 import 'package:flutter/material.dart';
@@ -10,16 +9,15 @@ import 'dart:convert' as convert;
 import '../../screens/login.dart';
 import '../model/messages_model.dart';
 
-
 class ChatPage extends StatefulWidget {
   int usernameId, selectedUserId;
   String selectedUsername;
-  ChatPage(
-      {super.key, 
-        required this.usernameId ,
-        required this.selectedUserId,
-        required this.selectedUsername,
-      });
+  ChatPage({
+    super.key,
+    required this.usernameId,
+    required this.selectedUserId,
+    required this.selectedUsername,
+  });
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -33,38 +31,41 @@ class _ChatPageState extends State<ChatPage> {
   Widget chatMessageTile(String message, bool sendByMe) {
     return Row(
       mainAxisAlignment:
-      sendByMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+          sendByMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         Flexible(
             child: Container(
-              padding: const EdgeInsets.all(16),
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: const Radius.circular(24),
-                      bottomRight:
-                      sendByMe ? const Radius.circular(0) : const Radius.circular(24),
-                      topRight: const Radius.circular(24),
-                      bottomLeft:
-                      sendByMe ? const Radius.circular(24) : const Radius.circular(0)),
-                  color: sendByMe
-                      ? const Color.fromARGB(255, 234, 236, 240)
-                      : const Color.fromARGB(255, 211, 228, 243)),
-              child: Text(
-                message,
-                style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.w500),
-              ),
-            )),
+          padding: const EdgeInsets.all(16),
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(24),
+                  bottomRight: sendByMe
+                      ? const Radius.circular(0)
+                      : const Radius.circular(24),
+                  topRight: const Radius.circular(24),
+                  bottomLeft: sendByMe
+                      ? const Radius.circular(24)
+                      : const Radius.circular(0)),
+              color: sendByMe
+                  ? const Color.fromARGB(255, 234, 236, 240)
+                  : const Color.fromARGB(255, 211, 228, 243)),
+          child: Text(
+            message,
+            style: const TextStyle(
+                color: Colors.black,
+                fontSize: 15.0,
+                fontWeight: FontWeight.w500),
+          ),
+        )),
       ],
     );
   }
 
   Widget chatMessage() {
     return FutureBuilder<List<Messages>>(
-      future: fetchMessages(LoggedIn.user_data['username']!, widget.selectedUsername),
+      future: fetchMessages(
+          LoggedIn.user_data['username']!, widget.selectedUsername),
       builder: (context, AsyncSnapshot<List<Messages>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -86,7 +87,8 @@ class _ChatPageState extends State<ChatPage> {
             reverse: true,
             itemBuilder: (context, index) {
               Messages message = snapshot.data![index];
-              return chatMessageTile(message.fields.text, widget.usernameId == snapshot.data![index].fields.sender);
+              return chatMessageTile(message.fields.text,
+                  widget.usernameId == snapshot.data![index].fields.sender);
             },
           );
         }
@@ -95,7 +97,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   addMessage(request) async {
-    if (messageController.text != ""){
+    if (messageController.text != "") {
       String text = messageController.text;
       messageController.text = "";
       var data = convert.jsonEncode(
@@ -105,21 +107,15 @@ class _ChatPageState extends State<ChatPage> {
         },
       );
       final response = await request.postJson(
-          "https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/send_messages/send/", data
-      );
+          "https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/send_messages/send/", data);
       if (response['status'] == 'success') {
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Pesan berhasil dikirim!"),
-            )
-        );
-      }
-      else {
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Terjadi kesalahan, mohon coba lagi."),
-            )
-        );
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Pesan berhasil dikirim!"),
+        ));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Terjadi kesalahan, mohon coba lagi."),
+        ));
       }
     }
   }
@@ -149,16 +145,17 @@ class _ChatPageState extends State<ChatPage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => const Home()));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Home()));
                     },
                     child: const Icon(
                       Icons.arrow_back_ios_new_outlined,
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(
-                      width: 10),
+                  const SizedBox(width: 10),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(40.0),
                     child: const Icon(
@@ -182,13 +179,12 @@ class _ChatPageState extends State<ChatPage> {
             ),
             Container(
               margin:
-              const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+                  const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
               alignment: Alignment.bottomCenter,
               child: Material(
                 elevation: 5.0,
                 borderRadius: BorderRadius.circular(30),
                 child: Container(
-
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -200,7 +196,7 @@ class _ChatPageState extends State<ChatPage> {
                         hintText: "Type a message",
                         hintStyle: const TextStyle(color: Colors.black45),
                         suffixIcon: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               addMessage(request);
                               setState(() {});
                             },

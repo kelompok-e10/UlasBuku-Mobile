@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import 'onboarding_screen2.dart';
 
-
 class OnboardingScreen1 extends StatefulWidget {
   const OnboardingScreen1({super.key});
 
@@ -57,38 +56,39 @@ class _OnbordingState extends State<OnboardingScreen1> {
               ),
             ),
             Container(
-              alignment: Alignment.bottomRight,
-              child: GestureDetector(
-                onTap: (){
-                  Get.to(() => const OnboardingScreen2(), transition: Transition.fadeIn,
-                  duration: const Duration(seconds: 1));
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                   ElevatedButton(
-                      onPressed: () {
-                        Get.to(() => const OnboardingScreen2(), transition: Transition.fade, duration: const Duration(seconds: 1));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange, 
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          'Next',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white
+                alignment: Alignment.bottomRight,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(() => const OnboardingScreen2(),
+                        transition: Transition.fadeIn,
+                        duration: const Duration(seconds: 1));
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Get.to(() => const OnboardingScreen2(),
+                              transition: Transition.fade,
+                              duration: const Duration(seconds: 1));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.orange,
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            'Next',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              )
-            )
+                    ],
+                  ),
+                ))
           ],
         ),
       ),
