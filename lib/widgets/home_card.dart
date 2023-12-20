@@ -44,7 +44,7 @@ class UlasBukuCard extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const ProductPage()));
           } else if (item.name == "Cari Buku") {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => BookSearchPage()));
+                MaterialPageRoute(builder: (context) => const BookSearchPage()));
           } else if (item.name == "Pesan") {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => const Home()));

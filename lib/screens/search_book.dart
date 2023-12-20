@@ -4,7 +4,7 @@ import 'package:ulasbuku_mobile/models/book.dart';
 import 'package:http/http.dart' as http;
 
 class BookSearchPage extends StatefulWidget {
-  BookSearchPage({Key? key}) : super(key: key);
+  const BookSearchPage({Key? key}) : super(key: key);
 
   @override
   _BookSearchPageState createState() => _BookSearchPageState();
@@ -114,19 +114,19 @@ class _BookSearchPageState extends State<BookSearchPage> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.sort_by_alpha), // Changed icon
+            icon: const Icon(Icons.sort_by_alpha), // Changed icon
             onPressed: sortBooksByTitle,
           ),
           IconButton(
-            icon: Icon(Icons.numbers), // Changed icon
+            icon: const Icon(Icons.numbers), // Changed icon
             onPressed: sortBooksByIsbn,
           ),
           IconButton(
-            icon: Icon(Icons.person), // Changed icon
+            icon: const Icon(Icons.person), // Changed icon
             onPressed: sortBooksByAuthor,
           ),
           IconButton(
-            icon: Icon(Icons.calendar_today), // Changed icon
+            icon: const Icon(Icons.calendar_today), // Changed icon
             onPressed: sortBooksByYear,
           ),
         ],
@@ -137,7 +137,7 @@ class _BookSearchPageState extends State<BookSearchPage> {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               '${_filteredBooks.length} results for "$_currentSearchTerm"',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(

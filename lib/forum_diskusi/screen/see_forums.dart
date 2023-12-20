@@ -94,7 +94,7 @@ class _ForumPageState extends State<ForumPage> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
-                    "${snapshot.data![index].bookInfo.imageUrlS}",
+                    snapshot.data![index].bookInfo.imageUrlS,
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -106,7 +106,7 @@ class _ForumPageState extends State<ForumPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${snapshot.data![index].bookInfo.bookTitle}",
+                    snapshot.data![index].bookInfo.bookTitle,
                     style: const TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
@@ -138,7 +138,7 @@ class _ForumPageState extends State<ForumPage> {
           "Ulasan:",
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        Text("${snapshot.data![index].review}"),
+        Text(snapshot.data![index].review),
         const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

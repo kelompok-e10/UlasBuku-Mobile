@@ -3,11 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:ulasbuku_mobile/onboarding_screen/onboarding_screen1.dart';
-import 'package:ulasbuku_mobile/screens/login.dart';
 // import 'package:ulasbuku_mobile/screens/login.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:ulasbuku_mobile/screens/login.dart';
 
 void main() {
   runApp(const MyApp());
