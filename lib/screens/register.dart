@@ -1,6 +1,5 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors, use_build_context_synchronously, sort_child_properties_last
 
-import 'dart:convert';
 
 import 'package:ulasbuku_mobile/screens/login.dart';
 import 'package:flutter/material.dart';
@@ -227,11 +226,13 @@ class _RegisterPageState extends State<RegisterPage> {
                               builder: (context) => const LoginPage()),
                         );
                       } else if (response['status'] == 'duplicate') {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
                           content: Text("Username sudah ada!"),
                         ));
                       } else if (response['status'] == 'pass failed') {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
                           content: Text("Password tidak cocok!"),
                         ));
                       } else {

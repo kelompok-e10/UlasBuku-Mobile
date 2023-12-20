@@ -19,7 +19,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(135, 148, 192, 1.0),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(1, 1, 1, 0.8),
+        backgroundColor: const Color.fromRGBO(1, 1, 1, 0.8),
          title: Row(
           children: [
             Padding(
