@@ -103,7 +103,12 @@ Widget build(BuildContext context) {
             ),
           ),
           const SizedBox(height: 20.0),
-          Padding(
+          Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 10),
             child: Container(
               decoration: BoxDecoration(
@@ -119,6 +124,12 @@ Widget build(BuildContext context) {
                     labelText: 'Username',
                     border: InputBorder.none,
                   ),
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return "Username tidak boleh kosong!";
+                    }
+                    return null;
+                  },
                 ),
               ),
             ),
@@ -140,6 +151,12 @@ Widget build(BuildContext context) {
                     border: InputBorder.none,
                   ),
                   obscureText: true,
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return "Password tidak boleh kosong!";
+                    }
+                    return null;
+                  },
                 ),
               ),
             ),
@@ -161,10 +178,18 @@ Widget build(BuildContext context) {
                     border: InputBorder.none,
                   ),
                   obscureText: true,
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return "Password confirmation tidak boleh kosong!";
+                    }
+                    return null;
+                  },
                 ),
-              ),
+              )
             ),
           ),
+              ],
+            )),
             const SizedBox(height: 24.0),
             ElevatedButton(
               onPressed: () async {
@@ -172,7 +197,7 @@ Widget build(BuildContext context) {
                 String username = _usernameController.text;
                 String password = _passwordController.text;
                 String passwordConfirmation = _passwordConfirmationController.text;
-
+                print("JAMAL");
                 // Kirim ke Django dan tunggu respons
                 // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                 final response = await request.postJson(
