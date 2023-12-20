@@ -161,7 +161,7 @@ class _ChatPageState extends State<ChatPage> {
                     child: const Icon(
                       Icons.account_circle,
                       size: 50.0,
-                      color: Colors.grey,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(
@@ -170,7 +170,7 @@ class _ChatPageState extends State<ChatPage> {
                   Text(
                     widget.selectedUsername,
                     style: const TextStyle(
-                        color: Color(0Xffc199cd),
+                        color: Colors.white,
                         fontSize: 20.0,
                         fontWeight: FontWeight.w500),
                   ),
