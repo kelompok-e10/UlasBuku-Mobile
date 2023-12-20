@@ -166,7 +166,7 @@ class _ForumFormPageState extends State<ForumFormPage> {
                           }
                           else if (_formKey.currentState!.validate()){
                           final response = await request.postJson(
-                            "http://127.0.0.1:8000/forum_discussion/create_forum_flutter/",
+                            "https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/forum_discussion/create_forum_flutter/",
                             jsonEncode(<String, dynamic>{
                               'username': request.jsonData['username'],
                               'password': request.jsonData['password'],

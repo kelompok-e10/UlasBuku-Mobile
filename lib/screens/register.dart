@@ -201,7 +201,7 @@ Widget build(BuildContext context) {
                 // Kirim ke Django dan tunggu respons
                 // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                 final response = await request.postJson(
-                    "http://127.0.0.1:8000/auth/register/",
+                    "https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/auth/register/",
                     jsonEncode(<String, String>{
                       'username': username,
                       'password': password,
