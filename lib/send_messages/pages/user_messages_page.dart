@@ -105,7 +105,7 @@ class _ChatPageState extends State<ChatPage> {
         },
       );
       final response = await request.postJson(
-          "http://127.0.0.1:8000/send_messages/send/", data
+          "https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/send_messages/send/", data
       );
       if (response['status'] == 'success') {
         ScaffoldMessenger.of(context).showSnackBar(

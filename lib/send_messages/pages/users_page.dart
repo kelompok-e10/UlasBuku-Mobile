@@ -128,7 +128,7 @@ class _HomeState extends State<Home> {
                         border: InputBorder.none,
                         hintText: 'Search User',
                         hintStyle: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontSize: 18.0,
                             fontWeight: FontWeight.w500)),
                     style: TextStyle(
@@ -154,7 +154,7 @@ class _HomeState extends State<Home> {
                       Text(
                   "Messages",
                   style: TextStyle(
-                      color: Color(0Xffc199cd),
+                      color: Colors.white,
                       fontSize: 22.0,
                       fontWeight: FontWeight.bold),
                 ),
@@ -170,7 +170,7 @@ class _HomeState extends State<Home> {
                   child: Container(
                     padding: EdgeInsets.all(6),
                     decoration: BoxDecoration(
-                        color: Color(0xFF3a2144),
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(20)),
                     child: search
                         ? GestureDetector(
@@ -180,12 +180,12 @@ class _HomeState extends State<Home> {
                       },
                       child: Icon(
                         Icons.close,
-                        color: Color(0Xffc199cd),
+                        color: Colors.blueAccent,
                       ),
                     )
                         : Icon(
                       Icons.search,
-                      color: Color(0Xffc199cd),
+                      color: Colors.blueAccent,
                     ),
                   ),
                 )
