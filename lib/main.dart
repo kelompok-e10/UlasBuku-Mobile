@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         return request;
       },
       child: GetMaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Ulas Buku Mobile',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(
