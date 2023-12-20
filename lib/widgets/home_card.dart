@@ -48,7 +48,7 @@ class UlasBukuCard extends StatelessWidget {
           } else if (item.name == "Pesan") {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => const Home()));
-          } else if (item.name == "Logout") {
+          } else if (item.name == "Log Out") {
             final response =
                 await request.logout("https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/auth/logout/");
             String message = response["message"];
