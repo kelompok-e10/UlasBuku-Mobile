@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:ulasbuku_mobile/models/book.dart';
-import 'package:ulasbuku_mobile/screens/detail_product.dart';
+import 'package:ulasbuku_mobile/screens/detail_book.dart';
 import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
 
 class ProductPage extends StatefulWidget {
@@ -64,7 +64,7 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product'),
+        title: const Text('Lihat Buku'),
       ),
       drawer: const LeftDrawer(),
       body: Padding(

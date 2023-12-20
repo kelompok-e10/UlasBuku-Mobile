@@ -43,14 +43,16 @@ class UlasBukuCard extends StatelessWidget {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ProductPage()));
           } else if (item.name == "Cari Buku") {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const BookSearchPage()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const BookSearchPage()));
           } else if (item.name == "Pesan") {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => const Home()));
           } else if (item.name == "Log Out") {
-            final response =
-                await request.logout("https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/auth/logout/");
+            final response = await request
+                .logout("https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/auth/logout/");
             String message = response["message"];
             if (response['status']) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -69,7 +71,7 @@ class UlasBukuCard extends StatelessWidget {
         },
         child: Container(
           // Container untuk menyimpan Icon dan Text
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(2),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -77,7 +79,7 @@ class UlasBukuCard extends StatelessWidget {
                 Icon(
                   item.icon,
                   color: Colors.black,
-                  size: 30.0,
+                  size: 20.0,
                 ),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(

@@ -53,7 +53,9 @@ class _BookDetailPageState extends State<BookDetailPage> {
               Expanded(
                 flex: 3,
                 child: FutureBuilder<ui.Image>(
-                  future: _getImage(widget.book.fields.imageUrlS),
+                  future: _getImage(widget.book.fields.imageUrlS
+                      .replaceAll('http://', 'https://')
+                      .replaceAll('images.amazon', 'm.media-amazon')),
                   builder:
                       (BuildContext context, AsyncSnapshot<ui.Image> snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
@@ -82,8 +84,21 @@ class _BookDetailPageState extends State<BookDetailPage> {
                                 child: Text('No Image Available'),
                               )
                             : Image.network(
-                                widget.book.fields.imageUrlS,
+                                widget.book.fields.imageUrlS
+                                    .replaceAll('http://', 'https://')
+                                    .replaceAll(
+                                        'images.amazon', 'm.media-amazon'),
                                 fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  if (error is NetworkImageLoadException) {
+                                    return const FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Text('No Image Available'),
+                                    );
+                                  } else {
+                                    throw error;
+                                  }
+                                },
                               ),
                       );
                     } else {
