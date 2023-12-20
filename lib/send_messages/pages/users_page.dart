@@ -21,7 +21,8 @@ class _HomeState extends State<Home> {
   List<UserInfo> userInfoList = [];
 
   Future<List<UserInfo>> fetchUserData() async {
-    Map<String, dynamic> data = await fetchUserInfo(LoggedIn.user_data['username']!);
+    Map<String, dynamic> data =
+        await fetchUserInfo(LoggedIn.userData['username']!);
     userInfoList.clear();
     data.forEach((key, value) {
       UserInfo userInfo = UserInfo.fromJson(value);
@@ -54,12 +55,12 @@ class _HomeState extends State<Home> {
               itemCount: userInfoList.length,
               reverse: true,
               itemBuilder: (context, index) {
-                String lastMessage = userInfoList[index]!.text;
+                String lastMessage = userInfoList[index].text;
                 return ChatRoomListTile(
                   userId: userId,
                   lastMessage: lastMessage,
-                  selectedUserId: userInfoList[index]!.selectedUserId,
-                  selectedUsername: userInfoList[index]!.selectedUser,
+                  selectedUserId: userInfoList[index].selectedUserId,
+                  selectedUsername: userInfoList[index].selectedUser,
                 );
               },
             ),
@@ -73,7 +74,7 @@ class _HomeState extends State<Home> {
   List<UserInfo> tempSearchStore = [];
 
   initiateSearch(value) {
-    if (userInfoList.length == 0){
+    if (userInfoList.isEmpty) {
       setState(() {});
     }
     if (value.length == 0) {
@@ -85,24 +86,26 @@ class _HomeState extends State<Home> {
     setState(() {
       search = true;
     });
-      tempSearchStore = [];
-      userInfoList.forEach((element) {
-        String val = element.selectedUser.substring(0, 1).toUpperCase() + element.selectedUser.substring(1);
-        if (value.length > 1){
-          if (val.startsWith(value.substring(0, 1).toUpperCase() + value.substring(1)) ||
-              val == (value.substring(0, 1).toUpperCase() + value.substring(1))){
-            setState(() {
-              tempSearchStore.add(element);
-            });
-          }
-        }else if (value.length == 1){
-          if (val.startsWith(value.substring(0, 1).toUpperCase())){
-            setState(() {
-              tempSearchStore.add(element);
-            });
-          }
+    tempSearchStore = [];
+    for (var element in userInfoList) {
+      String val = element.selectedUser.substring(0, 1).toUpperCase() +
+          element.selectedUser.substring(1);
+      if (value.length > 1) {
+        if (val.startsWith(
+                value.substring(0, 1).toUpperCase() + value.substring(1)) ||
+            val == (value.substring(0, 1).toUpperCase() + value.substring(1))) {
+          setState(() {
+            tempSearchStore.add(element);
+          });
         }
-      });
+      } else if (value.length == 1) {
+        if (val.startsWith(value.substring(0, 1).toUpperCase())) {
+          setState(() {
+            tempSearchStore.add(element);
+          });
+        }
+      }
+    }
   }
 
   @override
@@ -114,54 +117,51 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.only(
                 left: 20.0, right: 20.0, top: 50.0, bottom: 20.0),
-
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 search
-                    ?
-                  Expanded(child:TextField(
-                    onChanged: (value) {
-                      initiateSearch(value);
-                    },
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Search User',
-                        hintStyle: TextStyle(
+                    ? Expanded(
+                        child: TextField(
+                        onChanged: (value) {
+                          initiateSearch(value);
+                        },
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Search User',
+                            hintStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w500)),
+                        style: TextStyle(
                             color: Colors.white,
                             fontSize: 18.0,
-                            fontWeight: FontWeight.w500)),
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w500),
-                    )
-                  )
+                            fontWeight: FontWeight.w500),
+                      ))
                     : Row(children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => MyHomePage()));
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios_new_outlined,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                      Text(
-                  "Messages",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.bold),
-                ),
-
-                ]
-                ),
-
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyHomePage()));
+                          },
+                          child: Icon(
+                            Icons.arrow_back_ios_new_outlined,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Text(
+                          "Messages",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ]),
                 GestureDetector(
                   onTap: () {
                     search = true;
@@ -174,59 +174,58 @@ class _HomeState extends State<Home> {
                         borderRadius: BorderRadius.circular(20)),
                     child: search
                         ? GestureDetector(
-                      onTap: () {
-                        search = false;
-                        setState(() {});
-                      },
-                      child: Icon(
-                        Icons.close,
-                        color: Colors.blueAccent,
-                      ),
-                    )
+                            onTap: () {
+                              search = false;
+                              setState(() {});
+                            },
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.blueAccent,
+                            ),
+                          )
                         : Icon(
-                      Icons.search,
-                      color: Colors.blueAccent,
-                    ),
+                            Icons.search,
+                            color: Colors.blueAccent,
+                          ),
                   ),
                 )
               ],
             ),
           ),
-          Expanded(child:
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
-            width: MediaQuery.of(context).size.width,
-            height: search
-                ? MediaQuery.of(context).size.height / 1.19
-                : MediaQuery.of(context).size.height / 1.15,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20))),
-            child: Column(
-              children: [
-                search
-                    ? Expanded(
-                  child: ListView(
-                    padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                    primary: false,
-                    shrinkWrap: true,
-                    children: tempSearchStore.map((element) {
-                      return buildResultCard(element);
-                    }).toList(),
-                  ),
-                )
-                    : ChatRoomList(),
-              ],
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
+              width: MediaQuery.of(context).size.width,
+              height: search
+                  ? MediaQuery.of(context).size.height / 1.19
+                  : MediaQuery.of(context).size.height / 1.15,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20))),
+              child: Column(
+                children: [
+                  search
+                      ? Expanded(
+                          child: ListView(
+                            padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                            primary: false,
+                            shrinkWrap: true,
+                            children: tempSearchStore.map((element) {
+                              return buildResultCard(element);
+                            }).toList(),
+                          ),
+                        )
+                      : ChatRoomList(),
+                ],
+              ),
             ),
-          ),
           )
         ],
       ),
     );
   }
-
 
   Widget buildResultCard(UserInfo data) {
     return GestureDetector(
@@ -252,13 +251,12 @@ class _HomeState extends State<Home> {
             child: Row(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(50.0),
-                  child: Icon(
-                    Icons.account_circle,
-                    size: 60.0,
-                    color: Colors.grey,
-                  )
-                ),
+                    borderRadius: BorderRadius.circular(50.0),
+                    child: Icon(
+                      Icons.account_circle,
+                      size: 60.0,
+                      color: Colors.grey,
+                    )),
                 SizedBox(
                   width: 20.0,
                 ),
@@ -292,6 +290,7 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
 class UserInfo {
   final int userId;
   final String selectedUser;
@@ -314,13 +313,15 @@ class UserInfo {
     );
   }
 }
+
 class ChatRoomListTile extends StatefulWidget {
   final String selectedUsername;
   final String lastMessage;
   final int selectedUserId;
   final int userId;
 
-  ChatRoomListTile({
+  const ChatRoomListTile({
+    super.key,
     required this.userId,
     required this.lastMessage,
     required this.selectedUserId,
@@ -377,7 +378,7 @@ class _ChatRoomListTileState extends State<ChatRoomListTile> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width / 2,
                   child: Text(
                     widget.lastMessage,

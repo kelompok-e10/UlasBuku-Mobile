@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:ulasbuku_mobile/onboarding_screen/onboarding_screen1.dart';
 import 'package:ulasbuku_mobile/screens/login.dart';
-import 'package:ulasbuku_mobile/screens/menu.dart';
 import 'package:ulasbuku_mobile/screens/register.dart';
 
-import 'onboarding_screen2.dart';
-
-
 class OnboardingScreen2 extends StatefulWidget {
+  const OnboardingScreen2({super.key});
+
   @override
   _OnbordingState createState() => _OnbordingState();
 }
@@ -20,7 +17,7 @@ class _OnbordingState extends State<OnboardingScreen2> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -34,31 +31,34 @@ class _OnbordingState extends State<OnboardingScreen2> {
         child: Column(
           children: [
             Align(
-              alignment: Alignment.topLeft,
-              child: GestureDetector(
-                onTap: (){
-                  Get.to(() => OnboardingScreen1(), transition: Transition.fade, duration: Duration(seconds: 1));
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 30.0, top: 30), // Tambahkan ruang di sebelah kiri ikon
-                  child: Row(
-                    children: [
-                      Icon(
-                        color: Colors.white,
-                        Icons.arrow_back,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        'Prev',
-                        style: TextStyle(
+                alignment: Alignment.topLeft,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(() => const OnboardingScreen1(),
+                        transition: Transition.fade,
+                        duration: const Duration(seconds: 1));
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(
+                        left: 30.0,
+                        top: 30), // Tambahkan ruang di sebelah kiri ikon
+                    child: Row(
+                      children: [
+                        Icon(
                           color: Colors.white,
+                          Icons.arrow_back,
                         ),
-                      )
-                    ],
+                        SizedBox(width: 10),
+                        Text(
+                          'Prev',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ),
+                )),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
@@ -67,49 +67,50 @@ class _OnbordingState extends State<OnboardingScreen2> {
                     "assets/onboarding_image2.png",
                     height: 350,
                   ),
-                
-                  Text(
+                  const Text(
                     "Bergabung Sekarang di UlasBuku!",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 7),
+                  const SizedBox(height: 7),
                 ],
               ),
             ),
-        
             Container(
                 alignment: Alignment.center,
                 child: Column(
-                 children: [
-                   ElevatedButton(
-                     onPressed: () {
-                        Get.to(() => LoginPage(), transition: Transition.fadeIn, duration: Duration(seconds: 1));
-                     },
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Get.to(() => const LoginPage(),
+                            transition: Transition.fadeIn,
+                            duration: const Duration(seconds: 1));
+                      },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.pinkAccent, 
+                        backgroundColor: Colors.pinkAccent,
                       ),
-                     child: Text('Login',
-                      style: TextStyle(color: Colors.white) 
-                     ),
-                   ),
-                   SizedBox(height: 15),
-                   ElevatedButton(
-                     onPressed: () {
-                       Get.to(() => RegisterPage(), transition: Transition.fadeIn, duration: Duration(seconds: 1));
-                     },
-                     style: ElevatedButton.styleFrom(
-                        primary: Colors.pinkAccent, 
+                      child: const Text('Login',
+                          style: TextStyle(color: Colors.white)),
+                    ),
+                    const SizedBox(height: 15),
+                    ElevatedButton(
+                      onPressed: () {
+                        Get.to(() => const RegisterPage(),
+                            transition: Transition.fadeIn,
+                            duration: const Duration(seconds: 1));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.pinkAccent,
                       ),
-                     child: Text('Sign Up',
-                      style: TextStyle(color: Colors.white),
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(color: Colors.white),
                       ),
-                   ),
-                 ],
-                )
-            )
+                    ),
+                  ],
+                ))
           ],
         ),
       ),
