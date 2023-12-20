@@ -17,7 +17,7 @@ class ForumPage extends StatefulWidget {
 class _ForumPageState extends State<ForumPage> {
   Future<List<Forum>> fetchForum() async {
     var url =
-        Uri.parse('http://127.0.0.1:8000/forum_discussion/get_header_json/');
+        Uri.parse('https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/forum_discussion/get_header_json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
