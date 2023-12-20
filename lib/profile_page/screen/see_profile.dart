@@ -4,6 +4,7 @@ import 'package:ulasbuku_mobile/profile_page/model/profile.dart';
 import 'package:ulasbuku_mobile/screens/login.dart';
 import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
 import 'package:http/http.dart' as http;
+import 'package:ulasbuku_mobile/profile_page/screen/profileinfo_form.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -13,7 +14,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +64,17 @@ class _ProfilePageState extends State<ProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FloatingActionButton.extended(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ProfileInfoFormPage(),
+                            ),
+                          ).then((value) {
+                            // This code will be executed when the _ProfileInfoFormPage is popped
+                            // You can fetch and update the profile data here if needed
+                          });
+                        },
                         heroTag: 'profile',
                         elevation: 0,
                         backgroundColor: Colors.white,
@@ -111,36 +121,51 @@ class _ProfileInfo extends StatelessWidget {
           return CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
+        } else if (snapshot.data == null || snapshot.data?.profileData == null) {
+          return const Center(
+            child: Text(
+              ' ',
+              style: TextStyle(color: Color(0xff59A5D8), fontSize: 20),
+            ),
+          );
         } else {
           // Data has been loaded successfully
           Profile profile = snapshot.data!;
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                '${profile.description}',
-                style: Theme.of(context)
+          
+          return Card(
+            elevation: 4,
+            margin: const EdgeInsets.all(8),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    '${profile.description}',
+                    style: Theme.of(context)
                         .textTheme
                         .headline6
                         ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'First Name: ${profile.profileData.firstName} ',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Last Name: ${profile.profileData.lastName} ',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Contact: ${profile.profileData.contact}',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  // Add more fields as needed
+                ],
               ),
-              const SizedBox(height: 8),
-              Text(
-                'First Name: ${profile.profileData.firstName} ',
-                style: TextStyle(fontSize: 18),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Last Name: ${profile.profileData.lastName} ',
-                style: TextStyle(fontSize: 18),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Contact: ${profile.profileData.contact}',
-                style: TextStyle(fontSize: 18),
-              ),
-              // Add more fields as needed
-            ],
+            ),
           );
         }
       },
