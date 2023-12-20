@@ -50,7 +50,7 @@ class UlasBukuCard extends StatelessWidget {
                 context, MaterialPageRoute(builder: (context) => const Home()));
           } else if (item.name == "Logout") {
             final response =
-                await request.logout("http://127.0.0.1:8000/auth/logout/");
+                await request.logout("https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/auth/logout/");
             String message = response["message"];
             if (response['status']) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
