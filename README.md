@@ -126,7 +126,9 @@ Tautan berita acara dapat dilihat pada [tautan berikut](https://docs.google.com/
 
 # Tautan APK
 
-APK UlasBuku dapat diakses melalui [![Build status](https://build.appcenter.ms/v0.1/apps/82fc5b37-5a27-42a9-be32-3700d785fa00/branches/main/badge)](https://appcenter.ms)
+APK UlasBuku dapat diakses melalui [tautan berikut](https://install.appcenter.ms/orgs/ulasbuku-mobile/apps/ulasbuku-mobile/distribution_groups/public)
+
+Build Status: [![Build status](https://build.appcenter.ms/v0.1/apps/82fc5b37-5a27-42a9-be32-3700d785fa00/branches/main/badge)](https://appcenter.ms)
 
 ## Lisensi
 
