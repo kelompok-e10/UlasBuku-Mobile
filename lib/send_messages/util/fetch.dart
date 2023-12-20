@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:ulasbuku_mobile/send_messages/model/messages_model.dart';
 
 Future<Map<String, dynamic>> fetchUserInfo(String username) async {
-  var url = Uri.parse('http://127.0.0.1:8000/send_messages/user_info/$username/');
+  var url = Uri.parse('https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/send_messages/user_info/$username/');
   var response = await http.get(
     url,
     // headers: {
@@ -18,7 +18,7 @@ Future<Map<String, dynamic>> fetchUserInfo(String username) async {
 
 Future<List<Messages>> fetchMessages(String currentUser, String selectedUser) async{
   var url  = Uri.parse(
-      'http://127.0.0.1:8000/send_messages/message_list/$currentUser/$selectedUser/'
+      'https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/send_messages/message_list/$currentUser/$selectedUser/'
   );
   var response = await http.get(
     url,
