@@ -22,6 +22,13 @@ Aplikasi **UlasBuku** akan memiliki beberapa modul utama, termasuk:
 3. **Profile**: Pengguna dapat melihat profil mereka sendiri.
 4. **Pesan Sesama Pengguna**: Pengguna dapat berkomunikasi satu sama lain melalui pesan.
 
+## Pembagian Peran
+
+1. **Forum Buku**: Adrasa Cantya Salaka
+2. **Tambah Buku**: Darrel Danadyaksa Poli
+3. **Profile**: Dhemas Wicaksono Nugroho
+4. **Pesan Sesama Pengguna**: Surya Raavi Adiputra
+
 ## Sumber Data
 
 Data buku akan diambil dari API yang telah dibuat pada tugas kelompok yang dikerjakan sebagai proyek tengah semester. Data yang diambil tersebut diperoleh melalui [**Kaggle**](https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset/). API ini akan memberikan informasi tentang buku-buku yang tersedia, termasuk judul, penulis, tahun publikasi, penerbit, dan sampul buku.
