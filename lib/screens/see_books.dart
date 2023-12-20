@@ -90,14 +90,14 @@ class _ProductPageState extends State<ProductPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${_books[index].fields.bookTitle}",
+                            _books[index].fields.bookTitle,
                             style: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(height: 10),
-                          Text("${_books[index].fields.bookAuthor}"),
+                          Text(_books[index].fields.bookAuthor),
                           const SizedBox(height: 10),
                           Text("${_books[index].fields.yearOfPublication}"),
                           const SizedBox(height: 10),
@@ -123,8 +123,8 @@ class _ProductPageState extends State<ProductPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                child: Text('Load more'),
                 onPressed: fetchProduct,
+                child: const Text('Load more'),
               ),
             ),
           ],

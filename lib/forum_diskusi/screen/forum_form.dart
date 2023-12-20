@@ -25,9 +25,9 @@ class _ForumFormPageState extends State<ForumFormPage> {
     final request = context.watch<CookieRequest>();
 
     return Scaffold(
-      backgroundColor:Color.fromRGBO(135, 148, 192, 1.0),
+      backgroundColor:const Color.fromRGBO(135, 148, 192, 1.0),
       appBar: AppBar(
-        backgroundColor:Color.fromRGBO(1, 1, 1, 0.8),
+        backgroundColor:const Color.fromRGBO(1, 1, 1, 0.8),
         title: const Text(
           'Form Tambah Diskusi',
           style: TextStyle(

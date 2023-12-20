@@ -54,12 +54,12 @@ class _HomeState extends State<Home> {
               itemCount: userInfoList.length,
               reverse: true,
               itemBuilder: (context, index) {
-                String lastMessage = userInfoList[index]!.text;
+                String lastMessage = userInfoList[index].text;
                 return ChatRoomListTile(
                   userId: userId,
                   lastMessage: lastMessage,
-                  selectedUserId: userInfoList[index]!.selectedUserId,
-                  selectedUsername: userInfoList[index]!.selectedUser,
+                  selectedUserId: userInfoList[index].selectedUserId,
+                  selectedUsername: userInfoList[index].selectedUser,
                 );
               },
             ),
@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
   List<UserInfo> tempSearchStore = [];
 
   initiateSearch(value) {
-    if (userInfoList.length == 0){
+    if (userInfoList.isEmpty){
       setState(() {});
     }
     if (value.length == 0) {
@@ -86,7 +86,7 @@ class _HomeState extends State<Home> {
       search = true;
     });
       tempSearchStore = [];
-      userInfoList.forEach((element) {
+      for (var element in userInfoList) {
         String val = element.selectedUser.substring(0, 1).toUpperCase() + element.selectedUser.substring(1);
         if (value.length > 1){
           if (val.startsWith(value.substring(0, 1).toUpperCase() + value.substring(1)) ||
@@ -102,7 +102,7 @@ class _HomeState extends State<Home> {
             });
           }
         }
-      });
+      }
   }
 
   @override
@@ -320,7 +320,7 @@ class ChatRoomListTile extends StatefulWidget {
   final int selectedUserId;
   final int userId;
 
-  ChatRoomListTile({
+  const ChatRoomListTile({super.key, 
     required this.userId,
     required this.lastMessage,
     required this.selectedUserId,
@@ -377,7 +377,7 @@ class _ChatRoomListTileState extends State<ChatRoomListTile> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width / 2,
                   child: Text(
                     widget.lastMessage,

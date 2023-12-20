@@ -27,8 +27,8 @@ Future<List<Messages>> fetchMessages(String currentUser, String selectedUser) as
     //   "Content-Type": "application/json",
     // },
   );
-  List<Messages> messages_list = (jsonDecode(utf8.decode(response.bodyBytes)) as List)
+  List<Messages> messagesList = (jsonDecode(utf8.decode(response.bodyBytes)) as List)
       .map((json) => Messages.fromJson(json))
       .toList();
-  return messages_list;
+  return messagesList;
 }

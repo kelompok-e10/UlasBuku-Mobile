@@ -18,7 +18,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
   Future<ui.Image> _getImage(String url) {
     Image image = Image.network(url);
     Completer<ui.Image> completer = Completer<ui.Image>();
-    image.image.resolve(ImageConfiguration()).addListener(
+    image.image.resolve(const ImageConfiguration()).addListener(
           ImageStreamListener(
             (ImageInfo info, bool _) => completer.complete(info.image),
           ),
@@ -29,7 +29,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
       setState(() {
         _opacity = 1.0;
       });
@@ -44,7 +44,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
       ),
       body: AnimatedOpacity(
         opacity: _opacity,
-        duration: Duration(seconds: 1),
+        duration: const Duration(seconds: 1),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
