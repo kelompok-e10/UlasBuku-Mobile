@@ -22,7 +22,7 @@ class _ProfileInfoFormPageState extends State<ProfileInfoFormPage> {
 
   Future<bool> updateProfileOnServer(Map<String, dynamic> data) async {
     String username = LoggedIn.user_data['username']!;
-    String url = 'http://127.0.0.1:8000/user_profile/$username/update_profile_flutter/';
+    String url = 'https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/$username/update_profile_flutter/';
 
     try {
       var response = await http.post(
