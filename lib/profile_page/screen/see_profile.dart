@@ -210,5 +210,3 @@ class _TopPortion extends StatelessWidget {
     );
   }
 }
-
-
