@@ -17,7 +17,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(135, 148, 192, 1.0),
+      backgroundColor: const Color.fromRGBO(135, 148, 192, 1.0),
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(1, 1, 1, 0.8),
          title: Row(
@@ -31,7 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             const Text(
-              'Profile',
+              'Profile Page',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30.0,
@@ -53,10 +53,10 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 children: [
                   Text(
-                    LoggedIn.user_data['username']!,
+                    LoggedIn.userData['username']!,
                     style: Theme.of(context)
                         .textTheme
-                        .headline6
+                        .titleLarge
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
@@ -98,8 +98,9 @@ class _ProfileInfo extends StatelessWidget {
   const _ProfileInfo({Key? key}) : super(key: key);
 
   Future<Profile> fetchProfile() async {
-    String username = LoggedIn.user_data['username']!;
-    var url = Uri.parse('https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/user_profile/$username/get_json/');
+    String username = LoggedIn.userData['username']!;
+    var url = Uri.parse(
+        'https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/user_profile/$username/get_json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -118,10 +119,11 @@ class _ProfileInfo extends StatelessWidget {
       future: fetchProfile(),
       builder: (context, AsyncSnapshot<Profile> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
-        } else if (snapshot.data == null || snapshot.data?.profileData == null) {
+        } else if (snapshot.data == null ||
+            snapshot.data?.profileData == null) {
           return const Center(
             child: Text(
               ' ',
@@ -131,7 +133,7 @@ class _ProfileInfo extends StatelessWidget {
         } else {
           // Data has been loaded successfully
           Profile profile = snapshot.data!;
-          
+
           return Card(
             elevation: 4,
             margin: const EdgeInsets.all(8),
@@ -141,26 +143,26 @@ class _ProfileInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    '${profile.description}',
+                    profile.description,
                     style: Theme.of(context)
                         .textTheme
-                        .headline6
+                        .titleLarge
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'First Name: ${profile.profileData.firstName} ',
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Last Name: ${profile.profileData.lastName} ',
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Contact: ${profile.profileData.contact}',
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                   ),
                   // Add more fields as needed
                 ],
@@ -206,7 +208,7 @@ class _TopPortion extends StatelessWidget {
                     shape: BoxShape.circle,
                     color: Colors.white,
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Icon(
                       Icons.person,
                       size: 80,

@@ -4,7 +4,8 @@ import 'dart:convert';
 import 'package:ulasbuku_mobile/send_messages/model/messages_model.dart';
 
 Future<Map<String, dynamic>> fetchUserInfo(String username) async {
-  var url = Uri.parse('https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/send_messages/user_info/$username/');
+  var url = Uri.parse(
+      'https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/send_messages/user_info/$username/');
   var response = await http.get(
     url,
     // headers: {
@@ -16,10 +17,10 @@ Future<Map<String, dynamic>> fetchUserInfo(String username) async {
   return data;
 }
 
-Future<List<Messages>> fetchMessages(String currentUser, String selectedUser) async{
-  var url  = Uri.parse(
-      'https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/send_messages/message_list/$currentUser/$selectedUser/'
-  );
+Future<List<Messages>> fetchMessages(
+    String currentUser, String selectedUser) async {
+  var url = Uri.parse(
+      'https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/send_messages/message_list/$currentUser/$selectedUser/');
   var response = await http.get(
     url,
     // headers: {
@@ -27,8 +28,9 @@ Future<List<Messages>> fetchMessages(String currentUser, String selectedUser) as
     //   "Content-Type": "application/json",
     // },
   );
-  List<Messages> messages_list = (jsonDecode(utf8.decode(response.bodyBytes)) as List)
-      .map((json) => Messages.fromJson(json))
-      .toList();
-  return messages_list;
+  List<Messages> messagesList =
+      (jsonDecode(utf8.decode(response.bodyBytes)) as List)
+          .map((json) => Messages.fromJson(json))
+          .toList();
+  return messagesList;
 }

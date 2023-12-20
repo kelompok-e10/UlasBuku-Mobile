@@ -21,8 +21,9 @@ class _ProfileInfoFormPageState extends State<ProfileInfoFormPage> {
   String description = '';
 
   Future<bool> updateProfileOnServer(Map<String, dynamic> data) async {
-    String username = LoggedIn.user_data['username']!;
-    String url = 'https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/user_profile/$username/update_profile_flutter/';
+    String username = LoggedIn.userData['username']!;
+    String url =
+        'https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/user_profile/$username/update_profile_flutter/';
 
     try {
       var response = await http.post(
@@ -36,23 +37,19 @@ class _ProfileInfoFormPageState extends State<ProfileInfoFormPage> {
       if (response.statusCode == 200) {
         return true;
       } else {
-        print('HTTP Error: ${response.statusCode}');
         return false;
       }
     } catch (e) {
-      print('Exception: $e');
       return false;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
-
     return Scaffold(
-      backgroundColor: Color.fromRGBO(135, 148, 192, 1.0),
+      backgroundColor: const Color.fromRGBO(135, 148, 192, 1.0),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(1, 1, 1, 0.8),
+        backgroundColor: const Color.fromRGBO(1, 1, 1, 0.8),
         title: const Text(
           'Profile Info',
           style: TextStyle(
@@ -69,7 +66,7 @@ class _ProfileInfoFormPageState extends State<ProfileInfoFormPage> {
         child: Column(
           children: [
             TextFormField(
-              decoration: InputDecoration(labelText: 'Description'),
+              decoration: const InputDecoration(labelText: 'Description'),
               onChanged: (value) {
                 setState(() {
                   description = value;
@@ -77,7 +74,7 @@ class _ProfileInfoFormPageState extends State<ProfileInfoFormPage> {
               },
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'First Name'),
+              decoration: const InputDecoration(labelText: 'First Name'),
               onChanged: (value) {
                 setState(() {
                   firstName = value;
@@ -85,7 +82,7 @@ class _ProfileInfoFormPageState extends State<ProfileInfoFormPage> {
               },
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Last Name'),
+              decoration: const InputDecoration(labelText: 'Last Name'),
               onChanged: (value) {
                 setState(() {
                   lastName = value;
@@ -93,7 +90,7 @@ class _ProfileInfoFormPageState extends State<ProfileInfoFormPage> {
               },
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Contact'),
+              decoration: const InputDecoration(labelText: 'Contact'),
               onChanged: (value) {
                 setState(() {
                   contact = value;
@@ -116,14 +113,15 @@ class _ProfileInfoFormPageState extends State<ProfileInfoFormPage> {
                     Navigator.pop(context);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Failed to update profile. Please try again.'),
+                      const SnackBar(
+                        content:
+                            Text('Failed to update profile. Please try again.'),
                       ),
                     );
                   }
                 }
               },
-              child: Text('Submit'),
+              child: const Text('Submit'),
             ),
           ],
         ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:ulasbuku_mobile/models/book.dart';
-import 'package:ulasbuku_mobile/screens/detail_product.dart';
+import 'package:ulasbuku_mobile/screens/detail_book.dart';
 import 'package:ulasbuku_mobile/widgets/left_drawer.dart';
 
 class ProductPage extends StatefulWidget {
@@ -64,7 +64,7 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product'),
+        title: const Text('Lihat Buku'),
       ),
       drawer: const LeftDrawer(),
       body: Padding(
@@ -90,14 +90,14 @@ class _ProductPageState extends State<ProductPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${_books[index].fields.bookTitle}",
+                            _books[index].fields.bookTitle,
                             style: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(height: 10),
-                          Text("${_books[index].fields.bookAuthor}"),
+                          Text(_books[index].fields.bookAuthor),
                           const SizedBox(height: 10),
                           Text("${_books[index].fields.yearOfPublication}"),
                           const SizedBox(height: 10),
@@ -123,8 +123,8 @@ class _ProductPageState extends State<ProductPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                child: Text('Load more'),
                 onPressed: fetchProduct,
+                child: const Text('Load more'),
               ),
             ),
           ],
