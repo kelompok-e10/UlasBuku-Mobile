@@ -109,36 +109,51 @@ class _ProfileInfo extends StatelessWidget {
           return CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
+        } else if (snapshot.data == null || snapshot.data?.profileData == null) {
+          return const Center(
+            child: Text(
+              ' ',
+              style: TextStyle(color: Color(0xff59A5D8), fontSize: 20),
+            ),
+          );
         } else {
           // Data has been loaded successfully
           Profile profile = snapshot.data!;
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                '${profile.description}',
-                style: Theme.of(context)
+          
+          return Card(
+            elevation: 4,
+            margin: const EdgeInsets.all(8),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    '${profile.description}',
+                    style: Theme.of(context)
                         .textTheme
                         .headline6
                         ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'First Name: ${profile.profileData.firstName} ',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Last Name: ${profile.profileData.lastName} ',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Contact: ${profile.profileData.contact}',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  // Add more fields as needed
+                ],
               ),
-              const SizedBox(height: 8),
-              Text(
-                'First Name: ${profile.profileData.firstName} ',
-                style: TextStyle(fontSize: 18),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Last Name: ${profile.profileData.lastName} ',
-                style: TextStyle(fontSize: 18),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Contact: ${profile.profileData.contact}',
-                style: TextStyle(fontSize: 18),
-              ),
-              // Add more fields as needed
-            ],
+            ),
           );
         }
       },
