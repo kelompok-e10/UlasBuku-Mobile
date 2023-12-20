@@ -6,6 +6,7 @@ import 'package:ulasbuku_mobile/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'dart:convert' as convert;
 
 void main() {
   runApp(const RegisterApp());
@@ -197,16 +198,18 @@ Widget build(BuildContext context) {
                 String username = _usernameController.text;
                 String password = _passwordController.text;
                 String passwordConfirmation = _passwordConfirmationController.text;
-                print("JAMAL");
                 // Kirim ke Django dan tunggu respons
+                var data = convert.jsonEncode(
+                  <String, String?>{
+                    'username': username,
+                    'password': password,
+                    'password_confirmation': passwordConfirmation,
+                  },
+                );
                 // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                 final response = await request.postJson(
-                    "https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/auth/register/",
-                    jsonEncode(<String, String>{
-                      'username': username,
-                      'password': password,
-                      'password_confirmation': passwordConfirmation,
-                    }));
+                    "https://ulasbuku-e10-tk.pbp.cs.ui.ac.id/auth/register/", data
+                );
                 if (response['status'] == 'success') {
                   username = response['username'];
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -218,6 +221,14 @@ Widget build(BuildContext context) {
                     MaterialPageRoute(
                         builder: (context) => const LoginPage()),
                   );
+                } else if (response['status'] == 'duplicate') {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Username sudah ada!"),
+                  ));
+                } else if (response['status'] == 'pass failed') {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Password tidak cocok!"),
+                  ));
                 } else {
                   ScaffoldMessenger.of(context)
                       .showSnackBar(const SnackBar(
